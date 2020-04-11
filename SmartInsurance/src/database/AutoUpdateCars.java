@@ -52,7 +52,7 @@ public class AutoUpdateCars {
          allCars.addAll(getCars("https://eg.hatla2ee.com/en/car/price/" + brands[i]));
       }
 
-      //conn.createStatement().execute("delete from TestCars;");
+      conn.createStatement().execute("delete from TestCars;");
       PreparedStatement ps = conn.prepareStatement("insert into TestCars values (?,?,?,?,?)");
 
       for(int i = 0; i < allCars.size(); ++i) {
