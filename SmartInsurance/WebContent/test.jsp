@@ -63,7 +63,7 @@ Connection c;
 		rs.close();
 		ps.close();
 		c.close();%>
-		<button onclick="test()">Update Database Edens</button>
+		<button onclick="test()">Update Database Edeny</button>
 </body>
 <script>
 function test(){
@@ -71,7 +71,7 @@ function test(){
 		 url : 'CallCarUpdate',
          type : 'POST',
          success : function() {
-             alert("Car Prices ");
+             alert("Car Prices Are Being Updated ");
          }
      });
 }
