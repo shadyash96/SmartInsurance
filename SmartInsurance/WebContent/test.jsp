@@ -71,7 +71,7 @@ function test(){
 		 url : 'CallCarUpdate',
          type : 'POST',
          success : function() {
-             alert("Car Prices Are Being Updated");
+             alert("Car Prices Are Being Updated Every 6 hours");
          }
      });
 }
