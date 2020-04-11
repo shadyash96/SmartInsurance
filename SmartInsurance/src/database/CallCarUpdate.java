@@ -16,11 +16,9 @@ public class CallCarUpdate extends HttpServlet {
    }
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      try {
+  
          AutoUpdateCars.initiate();
-      } catch (SQLException | ClassNotFoundException var4) {
-         var4.printStackTrace();
-      }
+     
 
    }
 }

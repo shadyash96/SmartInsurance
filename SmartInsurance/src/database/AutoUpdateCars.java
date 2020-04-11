@@ -20,15 +20,24 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class AutoUpdateCars {
-   static ScheduledFuture<?> result;
+   static ScheduledFuture<?> result=null;
 
-   public static void initiate() throws ClassNotFoundException, SQLException, IOException {
+   public static void initiate() {
       if (result != null) {
          result.cancel(true);
       }
 
       ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-      result = scheduler.scheduleWithFixedDelay(AutoUpdateCars.renew(), 0L, 120L, TimeUnit.MINUTES);
+	  result = scheduler.scheduleWithFixedDelay(new Runnable() {
+			public void run() {try {
+				AutoUpdateCars.renew();
+			} catch (ClassNotFoundException | SQLException | IOException e) {
+				// TODO Auto-generated catch block
+				initiate();
+				e.printStackTrace();
+			}}
+		}, 0, 120, TimeUnit.MINUTES);
+	
    }
 
    static Runnable renew() throws ClassNotFoundException, SQLException, IOException {
