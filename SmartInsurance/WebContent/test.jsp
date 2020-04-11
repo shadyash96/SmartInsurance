@@ -63,7 +63,7 @@ Connection c;
 		rs.close();
 		ps.close();
 		c.close();%>
-		<button onclick="test()">Update Database Edeny</button>
+		<button onclick="test()">Update Database Edens</button>
 </body>
 <script>
 function test(){
