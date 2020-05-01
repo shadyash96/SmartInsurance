@@ -550,7 +550,7 @@
 		}
 	}
 
-// Select menu
+// select menu
 	function selectDropdown() {
 		if ($(".selectmenu").length) {
 			$(".selectmenu").selectmenu();

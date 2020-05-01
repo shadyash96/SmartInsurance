@@ -1,7 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
 
-
 /* ---------------------------------------------------------------------- */
 /* "Polyglot" Language Switcher
 /* ----------------------------------------------------------------------
@@ -12,7 +11,6 @@ License: MIT License
 License URI: http://www.opensource.org/licenses/mit-license.php
 ------------------------------------------------------------------------- */
 
-
 /* ---------------------------------------------------------------------- */
 /* TABLE OF CONTENTS
 /* ----------------------------------------------------------------------
@@ -20,18 +18,17 @@ License URI: http://www.opensource.org/licenses/mit-license.php
 -JS-created Code
 ------------------------------------------------------------------------- */
 
-
 /* ---------------------------------------------------------------------- */
 /* Generic
 /* ---------------------------------------------------------------------- */
 #polyglotLanguageSwitcher, #polyglotLanguageSwitcher * {
 	margin: 0;
-	padding: 0; 
+	padding: 0;
 	outline: none;
 }
 
 #polyglotLanguageSwitcher ul {
-	list-style: none;	
+	list-style: none;
 }
 
 #polyglotLanguageSwitcher {
@@ -39,12 +36,13 @@ License URI: http://www.opensource.org/licenses/mit-license.php
 	font-size: 12px;
 	color: #444;
 	line-height: normal;
-	position: relative; /* sets the initial position for the drop-down menu */	
+	position: relative;
+	/* sets the initial position for the drop-down menu */
 	z-index: 100;
 }
 
 #polyglotLanguageSwitcher form {
-	display: none;	
+	display: none;
 }
 
 /* ---------------------------------------------------------------------- */
@@ -52,32 +50,35 @@ License URI: http://www.opensource.org/licenses/mit-license.php
 /* ---------------------------------------------------------------------- */
 #polyglotLanguageSwitcher a {
 	text-decoration: none;
-	display: block;	
+	display: block;
 	padding: 0.5em 6px 0.5em 28px; /* 6px 6px 6px 28px */
 	color: #444;
 	width: 7em; /* 84px; total width: 120px */
 	background-repeat: no-repeat;
-	background-position: 6px center; 
+	background-position: 6px center;
 }
 
 #polyglotLanguageSwitcher a:hover {
-	color: #000;	
+	color: #000;
 }
 
-#polyglotLanguageSwitcher a.current:link, #polyglotLanguageSwitcher a.current:visited, #polyglotLanguageSwitcher a.current:active {
-	position: relative; /* sets the initial position for the trigger arrow */
+#polyglotLanguageSwitcher a.current:link, #polyglotLanguageSwitcher a.current:visited,
+	#polyglotLanguageSwitcher a.current:active {
+	position: relative;
+	/* sets the initial position for the trigger arrow */
 	background-color: #FFF;
 	border: 1px solid #E5E5E5;
 	border-radius: 3px;
 	height: 1.25em; /* 15px */
 }
 
-#polyglotLanguageSwitcher a.current:hover, 
-#polyglotLanguageSwitcher ul.dropdown li:hover {
+#polyglotLanguageSwitcher a.current:hover, #polyglotLanguageSwitcher ul.dropdown li:hover
+	{
 	background-color: #F7F7F7;
 }
 
-#polyglotLanguageSwitcher a.active { /* This style is applied as long as the drop-down menu is visible. */
+#polyglotLanguageSwitcher a.active {
+	/* This style is applied as long as the drop-down menu is visible. */
 	border-bottom: none !important;
 	border-radius: 3px 3px 0 0 !important;
 }
@@ -92,17 +93,19 @@ License URI: http://www.opensource.org/licenses/mit-license.php
 	right: 6px;
 }
 
-#polyglotLanguageSwitcher a.current:link span.trigger, #polyglotLanguageSwitcher a.current:visited span.trigger {
-	background: url(../images/arrow-down.gif) no-repeat left top;	
+#polyglotLanguageSwitcher a.current:link span.trigger,
+	#polyglotLanguageSwitcher a.current:visited span.trigger {
+	background: url(../images/arrow-down.gif) no-repeat left top;
 }
 
-#polyglotLanguageSwitcher a.current:hover span.trigger, #polyglotLanguageSwitcher a.current:active span.trigger, #polyglotLanguageSwitcher a.active span.trigger {
+#polyglotLanguageSwitcher a.current:hover span.trigger,
+	#polyglotLanguageSwitcher a.current:active span.trigger,
+	#polyglotLanguageSwitcher a.active span.trigger {
 	background-position: left bottom !important;
 }
 
 /* Drop-Down Menu */
-
-#polyglotLanguageSwitcher ul.dropdown { 
+#polyglotLanguageSwitcher ul.dropdown {
 	display: none;
 	position: absolute;
 	top: 2.333em; /* 28px */
@@ -113,32 +116,31 @@ License URI: http://www.opensource.org/licenses/mit-license.php
 	border-radius: 0 0 3px 3px;
 }
 
-#polyglotLanguageSwitcher ul.dropdown li { 
+#polyglotLanguageSwitcher ul.dropdown li {
 	border-top: 1px dotted #D4D4D4;
 }
 
-#polyglotLanguageSwitcher ul.dropdown li:last-child { 
+#polyglotLanguageSwitcher ul.dropdown li:last-child {
 	border-radius: 0 0 3px 3px;
 }
 
 /* Flags */
-
-#en { 
+#en {
 	background-image: url(../images/flags/gb.png);
 }
 
-#fr { 
-	background-image: url(../images/flags/fr.png);	
+#fr {
+	background-image: url(../images/flags/fr.png);
 }
 
-#de { 
-	background-image: url(../images/flags/de.png);	
+#de {
+	background-image: url(../images/flags/de.png);
 }
 
-#it { 
-	background-image: url(../images/flags/it.png);	
+#it {
+	background-image: url(../images/flags/it.png);
 }
 
-#es { 
-	background-image: url(../images/flags/es.png);	
+#es {
+	background-image: url(../images/flags/es.png);
 }
