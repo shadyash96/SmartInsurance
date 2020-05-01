@@ -63,7 +63,10 @@ Connection c;
 		rs.close();
 		ps.close();
 		c.close();%>
+
 	<button onclick="test()">Update Database 1</button>
+
+
 </body>
 <script>
 function test(){
