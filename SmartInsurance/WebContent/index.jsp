@@ -335,41 +335,27 @@
 											</div>
 										</div>
 										<div id="UsedCont"></div>
+										<div id="UsedCalculateButton" class="form-group col-md-6 col-sm-6 col-xs-12" style="display:none;">
+											<button  class="thm-btn" type="button" onclick="getPrice();">Calculate Product Price</button>
+										</div>
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
-											<input type="text" name="prod_price" value=""
+											<input type="number" id="ProductPrice" name="prod_price" value=""
 												placeholder="Product Current Price" required>
 										</div>
 
 
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
-											<input type="text" name="cov_perc" value=""
+											<input id="CoveragePercentage" type="number"
 												placeholder="Coverage Percentage" required>
 										</div>
 
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
-											<input type="text" name="prod_price" value=""
-												placeholder="Insurance Duration" required> months
+											<input id="InsuranceDuration" type="number"
+												placeholder="Insurance Duration in Months" required>
 										</div>
 
 
 
-										<!--
-										<input type="email" name="email" value="" placeholder="Your Mail *" required>
-									</div>
-
-                  <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                    <p> Payment Type:</p>
-
-              <div class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios">
-                    <label class="custom-control-label" for="defaultUnchecked" style="color: #fff;">Cash</label>
-                    </div>
-
- Default checked
-                    <div class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input" id="defaultChecked" name="defaultExampleRadios" checked>
-                  <label class="custom-control-label" for="defaultChecked" style="color: #fff;">Installment</label>
-                </div> -->
 
 
 
@@ -379,19 +365,32 @@
 											<div class="form-group">
 												<div class="col-sm-3">
 													<label class="radio-inline" style="color: #fff;"> <input
-														name="gender" id="input-gender-male" value="Male"
-														type="radio" />Cash
+														name="PaymentType" id="PaymentType" value="cash" onchange="InstallmentChange();"
+														type="radio" checked/>Cash
 													</label>
 												</div>
 												<div class="col-sm-3">
 													<label class="radio-inline" style="color: #fff;"> <input
-														name="gender" id="input-gender-female" value="Female"
+														name="PaymentType" id="PaymentType" value="installment" onchange="InstallmentChange();"
 														type="radio" />Installment
 													</label>
 												</div>
 											</div>
 										</div>
-
+										<div id="InstallmentCont" style="display:none;">
+										<div class="form-group col-md-6 col-sm-6 col-xs-12">
+											<input id="InstallmentDownpayment" type="number"
+												placeholder="Installment Downpayment">
+										</div>
+										<div class="form-group col-md-6 col-sm-6 col-xs-12">
+											<input id="InstallmentDuration" type="number"
+												placeholder="Installment Duration in Months">
+										</div>
+										</div>
+										<input type="hidden" id="NewPriceMode" name="NewPriceMode">
+										<input type="hidden" id="UsedPriceMode" name="UsedPriceMode">
+										<input type="hidden" id="rate" name="rate">
+										<input type="hidden" id="DownpaymentPerc" name="DownpaymentPerc">
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
 											<button type="submit" class="thm-btn">Calculate
 												Premium</button>

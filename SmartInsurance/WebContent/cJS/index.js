@@ -19,7 +19,15 @@ window.onload=function(){
 	
 }
 function CategoryChange(){
-		
+	var count=0;
+	var UsedFieldDivExists=document.getElementById("DivSub"+(count+1));
+	while (UsedFieldDivExists!=null){
+		//alert("da5l");
+		//$('#Sub'+(count+1)).selectpicker('delete');
+		UsedFieldDivExists.remove();
+		count++;
+		UsedFieldDivExists=document.getElementById("DivSub"+(count+1));	
+	}
 	var Category=document.getElementById("Categories");
 	var SelectedCategory=Category.options[Category.selectedIndex].text;
 	var fetch="Subs";
@@ -43,8 +51,14 @@ function CategoryChange(){
         	//creating new select Boxes for each subcategory
         	var myParent = document.getElementById("divCont");
         	var selectList=[];
+        	var divContainer=[];
         	for (var i=0;i<subCategories.length;i++){
-        		myParent.appendChild(document.createElement("br"));
+        		if (subCategories[i].length <=0)
+        			continue;
+        		//myParent.appendChild(document.createElement("br"));
+        		divContainer[i]=document.createElement("div");
+        		divContainer[i].appendChild(document.createElement("br"));
+        		divContainer[i].id="DivSub"+(i+1);
         		selectList[i]= document.createElement("select");
             	//Create and append select list
             	
@@ -57,25 +71,32 @@ function CategoryChange(){
         		//var funcName="Sub"+(i+1)+"Change();";
         		var funcName="SubChange("+(i+1)+");";
         		selectList[i].setAttribute("onchange", funcName);
-            	myParent.appendChild(selectList[i]);
+            	//myParent.appendChild(selectList[i]);
+        		divContainer[i].appendChild(selectList[i]);
             	selectList[i].add(new Option("Pick "+subCategories[i]));
+            	divContainer[i].appendChild(document.createElement("br"));
+            	myParent.appendChild(divContainer[i]);
             	$('#Sub'+(i+1)).selectpicker('refresh');
-            	myParent.appendChild(document.createElement("br"));
+            	//myParent.appendChild(document.createElement("br")); 
         	}
         	//Fill the first SUB
         	for (var i=0;i<dataList.length;i++){
         		selectList[0].add(new Option(dataList[i]));
         		$('#Sub1').selectpicker('refresh');
         	}
+        	if (document.querySelector('input[name="condition"]:checked').value=="used")
+        		ConditionChange();
+        	getConfigs();
         }
 });
 }
 
 function SubChange(count){
 	//var count=c;
+	document.getElementById("ProductPrice").value="";
 	var elementExists = document.getElementById("Sub"+(count+1));
 	if (elementExists==null){
-		getPrice(count);
+		getPrice();
 		return;
 	}
 	var fetch="Sub_"+count;
@@ -114,6 +135,7 @@ function SubChange(count){
 function clearSelections(count){
 	var counter=count+2;
 	//=count+1;
+	document.getElementById("ProductPrice").value="";
 	var elementExists = document.getElementById("Sub"+counter);
 	while (elementExists!=null){
 	elementExists.selectedIndex=0;
@@ -124,7 +146,9 @@ function clearSelections(count){
 	
 }
 
-function ConditionChange(cond){
+function ConditionChange(){
+	document.getElementById("ProductPrice").value="";
+	var cond=document.querySelector('input[name="condition"]:checked').value=="new"?"new":"used";
 	var Category=document.getElementById("Categories");
 	var SelectedCategory=Category.options[Category.selectedIndex].text;
 	var count=0;
@@ -139,10 +163,18 @@ function ConditionChange(cond){
 	if (Category.selectedIndex==0)
 		return;
 	if (cond=="new"){
-		if (Category.selectedIndex!=0)
+		if (document.getElementById("NewPriceMode").value=="auto"){
+			document.getElementById("ProductPrice").readOnly="true";
+			}
+		else
+			document.getElementById("ProductPrice").readOnly="false";
+		document.getElementById("UsedCalculateButton").style.display="none";
+		if (Category.selectedIndex!=0){
 			getPrice();
+			}
 		return;
 	}
+	else{
 	$.ajax({
         url:'GetUsedField',
         type:'POST',
@@ -155,6 +187,8 @@ function ConditionChange(cond){
         	var inputField=[];
         	for (var i=0;i<AllFields.length;i++){
         		//myParent.appendChild(document.createElement("br"));
+        		if (AllFields[i].split(":")[0].length<=0)
+        			continue;
         		divContainer[i]=document.createElement("div");
         		divContainer[i].id="UsedFieldDiv"+(i+1);
         		divContainer[i].classList.add("form-group");
@@ -169,10 +203,18 @@ function ConditionChange(cond){
         		myParent.appendChild(divContainer[i]);
         		divContainer[i].appendChild(inputField[i]);
         	}
-        	getPrice();
+        	if (document.getElementById("UsedPriceMode").value=="auto"){
+        		document.getElementById("UsedCalculateButton").style.display="block";
+        		document.getElementById("ProductPrice").readOnly="true";
+        	}
+        	else{
+        		document.getElementById("UsedCalculateButton").style.display="none";
+        		document.getElementById("ProductPrice").readOnly="false";
+        	}
+        	//getPrice();
         	
         }
-});
+});}
 }
 
 function getPrice(){
@@ -187,24 +229,108 @@ function getPrice(){
 	var SelectedCategory=Category.options[Category.selectedIndex].text;
 	list.SelectedCategory=SelectedCategory;
 	list.fetch="base";
-	list.condition=document.querySelector('input[name="condition"]:checked').value;
+	var Condition=document.querySelector('input[name="condition"]:checked').value;
+	list.Condition=document.querySelector('input[name="condition"]:checked').value;
 	for (var i=1;i<=count;i++){
 		var Sub=document.getElementById("Sub"+(i));
 		list["Sub"+i+"Name"]=document.getElementById("Sub"+i).getAttribute("name");
 		var SelectedSub=Sub.options[Sub.selectedIndex].text;
 		list["SelectedSub"+i]=SelectedSub;
 	}
+	list.NewPriceMode=document.getElementById("NewPriceMode").value;
+	list.UsedPriceMode=document.getElementById("UsedPriceMode").value;
+	list.SubCount=count;
+	if (Condition=="used" && document.getElementById("UsedPriceMode").value=="manual"){
+		return;
+	}
+	if (Condition=="new" && document.getElementById("NewPriceMode").value=="manual"){
+		return;
+	}
 	
-	/*$.ajax({
-        url:'GetData',
+	// fetch used fields
+	if (Condition=="used" && document.getElementById("UsedPriceMode").value=="auto"){
+		var countUsed=0;
+		var UsedelementExists = document.getElementById("UsedField"+(countUsed+1));
+		while (UsedelementExists!=null){
+			countUsed++;
+			UsedelementExists = document.getElementById("UsedField"+(countUsed+1));
+			}
+		list.UsedCount=countUsed;
+		for (var i=1;i<=countUsed;i++){
+			var Used=document.getElementById("UsedField"+(i));
+			list["UsedField"+i+"Name"]=document.getElementById("UsedField"+i).getAttribute("name");
+			var SelectedUsed=Used.value;
+			//alert(SelectedUsed);
+			list["SelectedUsedField"+i]=SelectedUsed;
+		}
+	}
+	
+	
+	$.ajax({
+        url:'GetPrice',
         type:'POST',
-        data: {fetch, SelectedCategory},
+        data: list,
         success: function(data){
-        	alert(count);
+        	if (data.length>20){
+        		alert(data);
+        		document.getElementById("ProductPrice").readOnly="false";
+        		}
+        	else	
+        		document.getElementById("ProductPrice").value=data;
         }
-});*/
+});
 }
 
+function getConfigs(){
+	var Category=document.getElementById("Categories");
+	var SelectedCategory=Category.options[Category.selectedIndex].text;
+	$.ajax({
+        url:'GetConfigs',
+        type:'POST',
+        data: {SelectedCategory},
+        success: function(data){
+        	//0_Min_Insur_Months, 1_Max_Insur_Months, 2_Min_Insur_Coverage, 3_Max_Insur_Coverage, 4_Min_Inst_Months, 
+        	//5_Max_Inst_Months, 6_Inst_Downpayment, 7_Rate, 8_NewPriceMode, 9_UsedPriceMode
+        	var InsuranceField=document.getElementById("InsuranceDuration");
+        	var CoverageField=document.getElementById("CoveragePercentage");
+        	InsuranceField.setAttribute("min",data.split(":")[0]);
+        	InsuranceField.setAttribute("max",data.split(":")[1]);
+        	CoverageField.setAttribute("min",data.split(":")[2]);
+        	CoverageField.setAttribute("max",data.split(":")[3]);
+        	//document.querySelector('input[name="PaymentType"]:checked').value=="";
+        	var PaymentOptions = document.getElementsByName('PaymentType');
+        	var InstallmentCont=document.getElementById("InstallmentCont");
+        	if (data.split(":")[5]==0){
+        		PaymentOptions[0].checked=true;
+        		PaymentOptions[1].disabled=true;
+        		InstallmentChange();
+        	}
+        	else{
+        		PaymentOptions[1].disabled=false;
+        		document.getElementById("InstallmentDuration").min=data.split(":")[4];
+        		document.getElementById("InstallmentDuration").max=data.split(":")[5];
+        		document.getElementById("DownpaymentPerc").value=data.split(":")[6]
+        	}
+        	document.getElementById("rate").value=data.split(":")[7];
+        	document.getElementById("NewPriceMode").value=data.split(":")[8];
+        	document.getElementById("UsedPriceMode").value=data.split(":")[9];
+        	var cond=document.querySelector('input[name="condition"]:checked').value=="new"?"new":"used";
+        	if (cond=="new" && document.getElementById("NewPriceMode").value=="auto"){
+        			document.getElementById("ProductPrice").readOnly="true";
+        			}
+        	//ConditionChange();
+        }
+});
+}
 
+function InstallmentChange(){
+	var Type=document.querySelector('input[name="PaymentType"]:checked').value;
+	var InstallmentCont=document.getElementById("InstallmentCont");
+	if (Type=="cash"){
+		InstallmentCont.style.display = "none";
+	}
+	else
+		InstallmentCont.style.display = "block";
+}
 
-//console.dir(list);
+//console.dir(list);.

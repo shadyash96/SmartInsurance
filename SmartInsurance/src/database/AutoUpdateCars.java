@@ -45,22 +45,23 @@ public class AutoUpdateCars {
       DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
       Date date = new Date();
       System.out.println(dateFormat.format(date));
-      String[] brands = new String[]{"geely", "chevrolet", "volks-wagen", "bmw", "mercedes"};
+      String[] brands = new String[]{"toyota","mini", "chevrolet", "jeep", "mercedes"};
       ArrayList<String[]> allCars = new ArrayList<String[]>();
 
       for(int i = 0; i < brands.length; ++i) {
          allCars.addAll(getCars("https://eg.hatla2ee.com/en/car/price/" + brands[i]));
       }
 
-      conn.createStatement().execute("delete from TestCars;");
-      PreparedStatement ps = conn.prepareStatement("insert into TestCars values (?,?,?,?,?)");
+      conn.createStatement().execute("delete from products_Cars;");
+      conn.createStatement().execute("DBCC CHECKIDENT ('products_Cars', RESEED, 0)");
+      PreparedStatement ps = conn.prepareStatement("insert into products_Cars (URL, Price, Brand, Model) values ('https://eg.hatla2ee.com/en/car/all-prices',?,?,?)");
 
       for(int i = 0; i < allCars.size(); ++i) {
-         ps.setString(1, ((String[])allCars.get(i))[0]);
-         ps.setString(2, ((String[])allCars.get(i))[1]);
-         ps.setString(3, ((String[])allCars.get(i))[2]);
-         ps.setInt(4, Integer.parseInt(((String[])allCars.get(i))[3]));
-         ps.setString(5, dateFormat.format(date));
+         ps.setString(2, ((String[])allCars.get(i))[0]);
+         ps.setString(3, ((String[])allCars.get(i))[1]);
+         //ps.setString(3, ((String[])allCars.get(i))[2]);
+         ps.setInt(1, Integer.parseInt(((String[])allCars.get(i))[3]));
+         //ps.setString(5, dateFormat.format(date));
          ps.addBatch();
       }
 
