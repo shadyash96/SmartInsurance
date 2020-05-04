@@ -1,9 +1,0 @@
-@relation trainData3
-
-@attribute price numeric
-@attribute Brand {BMW,Mercedes,Jeep,Honda,Mini,Toyota,Chevrolet}
-@attribute Model {320i,C180,GrandCherokee,Civic,CLA180,Clubman,Cooper,CountryMan,Corolla,Cruze,Malibu,X3}
-@attribute Mileage numeric
-@attribute Year numeric
-
-@data

@@ -51,18 +51,20 @@ public class GetData extends HttpServlet {
 			PreparedStatement ps=c.prepareStatement("Select Category from Configurations;");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				out.write(rs.getString(1)+",");
+				out.write(rs.getString(1)+","); // ay 7aga out.write btb3t le javascript
 				}
 			}
 		if (fetch.equals("Subs")) {//fetch sub categories
 			String Category=request.getParameter("SelectedCategory");
 			PreparedStatement ps=c.prepareStatement("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='products_"+Category+"' and ORDINAL_POSITION > 3 order by ORDINAL_POSITION asc;");
+			// btgeeb asamy el columns el b3d talet column fel category
 			ResultSet rs = ps.executeQuery();
 			int flag=0;
 			while (rs.next()) {
 				if (flag==0) {
 					out.write(rs.getString(1));
 					PreparedStatement pss=c.prepareStatement("SELECT distinct "+rs.getString(1)+" FROM products_"+Category+"");
+					// btgeeb el data bta3t awl sub category
 					ResultSet rss = pss.executeQuery();
 					while (rss.next())
 						out.write(":"+rss.getString(1));	

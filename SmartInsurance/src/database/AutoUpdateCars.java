@@ -42,9 +42,9 @@ public class AutoUpdateCars {
 
    static Runnable renew() throws ClassNotFoundException, SQLException, IOException {
       Connection conn = DatabaseConnection.getConnection();
-      DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+      /*DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
       Date date = new Date();
-      System.out.println(dateFormat.format(date));
+      System.out.println(dateFormat.format(date));*/
       String[] brands = new String[]{"toyota","mini", "chevrolet", "jeep", "mercedes"};
       ArrayList<String[]> allCars = new ArrayList<String[]>();
 
