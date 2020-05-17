@@ -159,7 +159,7 @@ function getConfigs(){
         data: {SelectedCategory},
         success: function(data){
         	//0_Min_Insur_Months, 1_Max_Insur_Months, 2_Min_Insur_Coverage, 3_Max_Insur_Coverage, 4_Min_Inst_Months, 
-        	//5_Max_Inst_Months, 6_Inst_Downpayment, 7_Rate, 8_NewPriceMode, 9_UsedPriceMode
+        	//5_Max_Inst_Months, 6_Inst_Downpayment, 7_Rate, 8_NewPriceMode, 9_UsedPriceMode, 10_Inst_interest_month
         	var InsuranceField=document.getElementById("InsuranceDuration");
         	var CoverageField=document.getElementById("CoveragePercentage");
         	InsuranceField.setAttribute("min",data.split(":")[0]);
@@ -179,6 +179,7 @@ function getConfigs(){
         		document.getElementById("InstallmentDuration").min=data.split(":")[4];
         		document.getElementById("InstallmentDuration").max=data.split(":")[5];
         		document.getElementById("DownpaymentPerc").value=data.split(":")[6]
+        		document.getElementById("Inst_Interest_Month").value=data.split(":")[10]
         	}
         	document.getElementById("rate").value=data.split(":")[7];
         	document.getElementById("NewPriceMode").value=data.split(":")[8];
@@ -322,8 +323,11 @@ function getPrice(){
         		alert(data);
         		document.getElementById("ProductPrice").readOnly="false";
         		}
-        	else	
+        	else	{
+        		document.getElementById("ProductPrice").setAttribute('value',data);
         		document.getElementById("ProductPrice").value=data;
+        		}
+        	PriceChange();
         }
 });
 }
@@ -339,4 +343,36 @@ function InstallmentChange(){
 		InstallmentCont.style.display = "block";
 }
 
+function PriceChange(){
+	var inst_dp=document.getElementById("DownpaymentPerc").value;
+	document.getElementById("InstallmentDownpayment").min=document.getElementById("ProductPrice").value*(inst_dp/100);
+}
+
 //console.dir(list);.
+function CalculatePremium(){
+	//alert("Da5l hena");
+	var Category=document.getElementById("Categories");
+	var SelectedCategory=Category.options[Category.selectedIndex].text;
+	var Price=document.getElementById("ProductPrice").value;
+	var CoveragePercentage=document.getElementById("CoveragePercentage").value;
+	var InsuranceDuration=document.getElementById("InsuranceDuration").value;
+	var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
+	var InstallmentDownpayment=document.getElementById("InstallmentDownpayment").value;
+	var InstallmentDuration=document.getElementById("InstallmentDuration").value;
+	$.ajax({
+        url:'GetPremium',
+        type:'POST',
+        data: list,
+        success: function(data){
+        	if (data.length>20){
+        		alert(data);
+        		document.getElementById("ProductPrice").readOnly="false";
+        		}
+        	else	{
+        		document.getElementById("ProductPrice").setAttribute('value',data);
+        		document.getElementById("ProductPrice").value=data;
+        		}
+        	PriceChange();
+        }
+});
+}

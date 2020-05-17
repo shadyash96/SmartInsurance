@@ -339,8 +339,8 @@
 											<button  class="thm-btn" type="button" onclick="getPrice();">Calculate Product Price</button>
 										</div>
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
-											<input type="number" id="ProductPrice" name="prod_price" value=""
-												placeholder="Product Current Price" required>
+											<input type="number" id="ProductPrice" name="prod_price" 
+												placeholder="Product Current Price"  onchange="PriceChange();" required>
 										</div>
 
 
@@ -391,9 +391,9 @@
 										<input type="hidden" id="UsedPriceMode" name="UsedPriceMode">
 										<input type="hidden" id="rate" name="rate">
 										<input type="hidden" id="DownpaymentPerc" name="DownpaymentPerc">
+										<input type="hidden" id="Inst_Interest_Month" name="Inst_Interest_Month">
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
-											<button type="submit" class="thm-btn">Calculate
-												Premium</button>
+											<button type="submit" class="thm-btn" onclick="CalculatePremium();">Calculate Premium</button>
 										</div>
 									</div>
 								</form>

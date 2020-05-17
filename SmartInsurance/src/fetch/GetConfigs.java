@@ -49,7 +49,7 @@ public class GetConfigs extends HttpServlet {
 		//String fetch=request.getParameter("fetch");
 		try {
 			Connection c=DatabaseConnection.getConnection();
-			PreparedStatement ps=c.prepareStatement("SELECT Min_Insur_Months, Max_Insur_Months, Min_Insur_Coverage, Max_Insur_Coverage, Min_Inst_Months, Max_Inst_Months, Inst_Downpayment, Rate, NewPriceMode, UsedPriceMode FROM Configurations where Category=?;");
+			PreparedStatement ps=c.prepareStatement("SELECT Min_Insur_Months, Max_Insur_Months, Min_Insur_Coverage, Max_Insur_Coverage, Min_Inst_Months, Max_Inst_Months, Inst_Downpayment, Rate, NewPriceMode, UsedPriceMode, Inst_interest_month FROM Configurations where Category=?;");
 			ps.setString(1, Category);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
