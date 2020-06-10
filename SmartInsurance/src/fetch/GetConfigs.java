@@ -53,7 +53,7 @@ public class GetConfigs extends HttpServlet {
 			ps.setString(1, Category);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				for (int i=1;i<=10;i++)
+				for (int i=1;i<=11;i++)
 					out.write(rs.getString(i)+":");
 			}
 			c.close();

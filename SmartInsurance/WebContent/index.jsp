@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.nio.charset.Charset" %>
+<%@ page import="java.io.InputStream"%>
+<%@ page import="java.io.ByteArrayInputStream"%>
+<%@ page import="connection.DatabaseConnection"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +37,7 @@
 	================================================== -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
-<script src="cJS/index.js"></script>
+<script src="cJS/index.js?v=3"></script>
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
 <!--[if lt IE 9]>
@@ -57,7 +65,38 @@
 
 
 		<jsp:include page="header.jsp" />
-
+		<%
+Cookie[] Allcookies = null;
+Allcookies = request.getCookies();
+String JSessionID = null;
+Cookie JSession = null;
+if (Allcookies != null) {
+	for (int i = 0; i < Allcookies.length; i++) {
+		if (Allcookies[i].getName().equals("JSESSIONID")) {
+	JSession = Allcookies[i];
+		}
+	}
+}
+if (JSession != null)
+	JSessionID = JSession.getValue();
+String login="null";
+String nationalID="";
+if (JSessionID!=null){
+	Connection c= DatabaseConnection.getConnection();
+	PreparedStatement ps=c.prepareStatement("select Type, Client_ID from Accounts where SessionID=?");
+	ps.setString(1, JSessionID);
+	ResultSet rs= ps.executeQuery();
+	if (rs.next()){
+		login=rs.getString(1);
+		if (login.equals("Client")){
+		ResultSet rss=c.prepareStatement("Select Identification_no from Clients where Client_ID="+rs.getInt(2)).executeQuery();	
+		if (rss.next())
+			nationalID=rss.getString(1);
+		}
+	}
+	c.close();
+}
+%>
 		<section class="rev_slider_wrapper ">
 			<div id="slider1" class="rev_slider" data-version="5.0">
 				<ul>
@@ -106,8 +145,8 @@
 							data-x="left" data-hoffset="0" data-y="top" data-voffset="375"
 							data-whitespace="nowrap" data-transform_idle="o:1;"
 							data-transform_in="o:0" data-transform_out="o:0" data-start="500">
-							Insurance best-in-class products and services <br /> help provide
-							innovative protection
+							Insurance best-in-class products and services <br /> help
+							provide innovative protection
 						</div>
 						<div class="tp-caption sfl tp-resizeme factory-caption-p"
 							data-x="left" data-hoffset="-29" data-y="top" data-voffset="475 "
@@ -139,8 +178,8 @@
 							data-x="center" data-hoffset="0" data-y="top" data-voffset="375"
 							data-whitespace="nowrap" data-transform_idle="o:1;"
 							data-transform_in="o:0" data-transform_out="o:0" data-start="500">
-							Insurance best-in-class products and services <br /> help provide
-							innovative protection.
+							Insurance best-in-class products and services <br /> help
+							provide innovative protection.
 						</div>
 						<div
 							class="tp-caption sfl tp-resizeme factory-caption-p text-center"
@@ -299,19 +338,19 @@
 						<!--form-box-->
 						<div class="form-box default-form">
 							<div class="default-form">
-								<form action="#"
-									class="home-contact-form contact-form select-form">
+								<form id="form" class="home-contact-form  select-form" action="InsuranceRequest" method="post" onsubmit="return validateForm();">
 									<div class="row clearfix">
 
 										<div class="form-group col-md-12 col-sm-12 col-xs-12">
-											<input type="text" name="national_id" value=""
-												placeholder="National Id *" required>
+											<input type="text" name="national_id" value="<%=nationalID %>"
+												placeholder="National Id">
 										</div>
 
 										<div id="divCont"
 											class="form-group col-md-12 col-sm-12 col-xs-12">
 											<div class="g-input f1 mb-30">
-												<select id="Categories" name="Categories" onchange="CategoryChange();"
+												<select id="Categories" name="Categories"
+													onchange="CategoryChange();"
 													class="text-capitalize selectpicker" data-style="g-select"
 													data-width="100%">
 												</select>
@@ -322,81 +361,92 @@
 											<div class="form-group">
 												<div class="col-sm-3">
 													<label class="radio-inline" style="color: #fff;"> <input
-														name="condition" id="condition" value="new"
-														type="radio" checked onchange="ConditionChange('new');"/>New
+														name="condition" id="condition" value="new" type="radio"
+														checked onchange="ConditionChange('new');" />New
 													</label>
 												</div>
 												<div class="col-sm-3">
 													<label class="radio-inline" style="color: #fff;"> <input
-														name="condition" id="condition" value="used"
-														type="radio" onchange="ConditionChange('used');" />Used
+														name="condition" id="condition" value="used" type="radio"
+														onchange="ConditionChange('used');" />Used
 													</label>
 												</div>
 											</div>
 										</div>
 										<div id="UsedCont"></div>
-										<div id="UsedCalculateButton" class="form-group col-md-6 col-sm-6 col-xs-12" style="display:none;">
-											<button  class="thm-btn" type="button" onclick="getPrice();">Calculate Product Price</button>
+										<div id="UsedCalculateButton"
+											class="form-group col-md-6 col-sm-6 col-xs-12"
+											style="display: none;">
+											<button class="thm-btn" type="button" onclick="getPrice();">Calculate Price</button>
 										</div>
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
-											<input type="number" id="ProductPrice" name="prod_price" 
-												placeholder="Product Current Price"  onchange="PriceChange();" required>
+											<input type="number" id="ProductPrice" name="ProductPrice"
+												placeholder="Product Current Price"
+												onchange="PriceChange();" required>
 										</div>
 
 
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
-											<input id="CoveragePercentage" type="number"
-												placeholder="Coverage Percentage" required>
+											<input id="CoveragePercentage" name="CoveragePercentage" type="number"
+												placeholder="Coverage Percentage" value="" required>
 										</div>
 
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
-											<input id="InsuranceDuration" type="number"
+											<input id="InsuranceDuration" name="InsuranceDuration" type="number"
 												placeholder="Insurance Duration in Months" required>
 										</div>
-
-
-
-
-
-
 
 										<div class="form-group col-md-12 col-sm-12 col-xs-12">
 											<label class="row" style="color: #fff;">Payment Type:</label>
 											<div class="form-group">
 												<div class="col-sm-3">
 													<label class="radio-inline" style="color: #fff;"> <input
-														name="PaymentType" id="PaymentType" value="cash" onchange="InstallmentChange();"
-														type="radio" checked/>Cash
+														name="PaymentType" id="PaymentType" value="cash"
+														onchange="InstallmentChange();" type="radio" checked />Cash
 													</label>
 												</div>
 												<div class="col-sm-3">
 													<label class="radio-inline" style="color: #fff;"> <input
-														name="PaymentType" id="PaymentType" value="installment" onchange="InstallmentChange();"
-														type="radio" />Installment
+														name="PaymentType" id="PaymentType" value="installment"
+														onchange="InstallmentChange();" type="radio" />Installment
 													</label>
 												</div>
 											</div>
 										</div>
-										<div id="InstallmentCont" style="display:none;">
-										<div class="form-group col-md-6 col-sm-6 col-xs-12">
-											<input id="InstallmentDownpayment" type="number"
-												placeholder="Installment Downpayment">
-										</div>
-										<div class="form-group col-md-6 col-sm-6 col-xs-12">
-											<input id="InstallmentDuration" type="number"
-												placeholder="Installment Duration in Months">
-										</div>
+										<div id="InstallmentCont" style="display: none;">
+											<div class="form-group col-md-6 col-sm-6 col-xs-12">
+												<input id="InstallmentDownpayment" name="InstallmentDownpayment" type="number"
+													placeholder="Installment Downpayment">
+											</div>
+											<div class="form-group col-md-6 col-sm-6 col-xs-12">
+												<input id="InstallmentDuration" name="InstallmentDuration" type="number"
+													placeholder="Installment Duration in Months">
+											</div>
 										</div>
 										<input type="hidden" id="NewPriceMode" name="NewPriceMode">
 										<input type="hidden" id="UsedPriceMode" name="UsedPriceMode">
-										<input type="hidden" id="rate" name="rate">
+										<input type="hidden" id="rate" name="rate"> 
 										<input type="hidden" id="DownpaymentPerc" name="DownpaymentPerc">
-										<input type="hidden" id="Inst_Interest_Month" name="Inst_Interest_Month">
+										<input type="hidden" id="InitialPremium">
+										<input type="hidden" id="Inst_Interest_Month"
+											name="Inst_Interest_Month">
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
-											<button type="submit" class="thm-btn" onclick="CalculatePremium();">Calculate Premium</button>
+											<button type="button" class="thm-btn"
+												onclick="CalculatePremium();">Calculate Premium</button>
 										</div>
+										<div class="form-group col-md-6 col-sm-6 col-xs-12">
+											<input id="PremiumValue" name="PremiumValue" type="text" value="" placeholder="Premium Quotation" readonly>
+										</div>
+										<%if (login.equals("Client")) {%>
+										<button type="submit" class="thm-btn sub">Submit Request</button>
+										<%}%>
+										
 									</div>
 								</form>
+								<%if (!login.equals("Client")) {%>
+										<h5 style="color:white;">Login to submit an insurance request</h5>
+										<%}%>
+						
 							</div>
 						</div>
 					</div>

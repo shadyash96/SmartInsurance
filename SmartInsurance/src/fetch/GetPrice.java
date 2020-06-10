@@ -79,6 +79,7 @@ public class GetPrice extends HttpServlet {
 						.prepareStatement("Select avg(Price) from products_" + Category + " where " + whereStat + ";");
 				ResultSet rs = ps.executeQuery();
 				while (rs.next())
+					if (rs.getString(1) != null)
 					out.write(rs.getString(1));
 			}
 			if (Condition.equals("used")) {
@@ -125,5 +126,5 @@ public class GetPrice extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
+	
 }

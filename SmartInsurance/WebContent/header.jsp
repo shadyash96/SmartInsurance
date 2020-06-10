@@ -1,7 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+     <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.nio.charset.Charset" %>
+<%@ page import="java.io.InputStream"%>
+<%@ page import="java.io.ByteArrayInputStream"%>
+<%@ page import="connection.DatabaseConnection"%>
 <!DOCTYPE html>
 <html>
+<%
+Cookie[] Allcookies = null;
+Allcookies = request.getCookies();
+String JSessionID = null;
+Cookie JSession = null;
+if (Allcookies != null) {
+	for (int i = 0; i < Allcookies.length; i++) {
+		if (Allcookies[i].getName().equals("JSESSIONID")) {
+	JSession = Allcookies[i];
+		}
+	}
+}
+if (JSession != null)
+	JSessionID = JSession.getValue();
+String login="null";
+if (JSessionID!=null){
+	Connection c= DatabaseConnection.getConnection();
+	PreparedStatement ps=c.prepareStatement("select Type from Accounts where SessionID=?");
+	ps.setString(1, JSessionID);
+	ResultSet rs= ps.executeQuery();
+	if (rs.next()){
+		login=rs.getString(1);
+	}
+	c.close();
+}
+%>
 <!-- Start header top -->
 <header class="main-header">
 	<div class="header-top">
@@ -16,7 +51,11 @@
 			<!--Top Right-->
 			<div class="top-right pull-right">
 				<ul class="links-nav clearfix">
-					<li><a href="account.html">Login/Register</a></li>
+				<%if (!login.equals("null")){ %>
+					<li><a href="Logout">Logout</a></li><%} 
+					else {%>
+					<!-- <li><a href="clientLogin-Register.jsp">Login/Register</a></li> -->
+					<%} %>
 					<li><a href="#">Contact Us</a></li>
 				</ul>
 			</div>
@@ -28,7 +67,7 @@
 
 				<div class="pull-left logo-outer">
 					<div class="logo">
-						<a href="index-2.html"><img src="images/logo/logo.png"
+						<a href="index.jsp"><img src="images/logo/logo.png"
 							alt="Renter" title="Insurance Company"></a>
 					</div>
 				</div>
@@ -70,7 +109,7 @@
 		<nav class="mainmenu-holder pull-left">
 			<div class="nav-header">
 				<ul class="navigation">
-					<li class="active"><a href="index.html">Home</a></li>
+					<li class="active"><a href="index.jsp">Home</a></li>
 					<li class="dropdown"><a href="about.html">About</a>
 						<ul class="submenu">
 							<li><a href="about.html">About Us</a></li>
@@ -81,18 +120,24 @@
 					<li class="dropdown"><a href="insurance.html">Client
 							Portal</a>
 						<ul class="submenu">
-							<li><a href="user-profile.html">User Info</a></li>
-							<li><a href="insured-items.html">Insured Items</a></li>
-							<li><a href="payments.html">Payments</a></li>
-							<li><a href="user-make-claim.html">Claim Request</a></li>
-
+						<% if (login.equals("Client")){%>
+							<li><a href="#" onclick="redirect('clientProfile','Client')">User Info</a></li>
+							<li><a href="#" onclick="redirect('insuredItems','Client')">Insured Items</a></li>
+							<li><a href="#" onclick="redirect('Payments','Client')">Payments</a></li>
+							<li><a href="#" onclick="redirect('MakeClaim','Client')">Claim Request</a></li>
+							<%}
+						else{%>
+						<li><a href="ClientLogin.jsp">Login/Register</a></li>
+						<%} %>
 						</ul></li>
 					<li class="dropdown"><a href="#">Insurer Portal</a>
 						<ul class="submenu">
-							<li><a href="testimonial.html">Manage items</a></li>
-							<li><a href="make-claim.html">Configure Rates</a></li>
-							<li><a href="make-claim.html">Insurance Requests</a></li>
-							<li><a href="make-claim.html">Claims Management</a></li>
+						<% if (login.equals("Insurer")){%>
+							<li><a href="#" onclick="redirect('InsurerDashboard','Insurer')">Portal</a></li>
+								<%}
+						else{%>
+						<li><a href="InsurerLogin.jsp">Login/Register</a></li>
+						<%} %>
 						</ul></li>
 					<!--	<li class="dropdown">
 							<a href="blog.html">Blog</a>
@@ -138,3 +183,4 @@
 </section>
 <!-- End nav menu -->
 </html>
+<script src="cJS/Redirect.js"></script>

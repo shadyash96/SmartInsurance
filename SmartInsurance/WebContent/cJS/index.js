@@ -1,10 +1,13 @@
 window.onload=function(){ // lma el page t5ls load
+	document.getElementById("CoveragePercentage").addEventListener("change", function(){ CHANGE(document.getElementById("CoveragePercentage"));});
+	document.getElementById("InsuranceDuration").addEventListener("change", function(){ CHANGE(document.getElementById("InsuranceDuration"));});
+	document.getElementById("InstallmentDuration").addEventListener("change", function(){ CHANGE(document.getElementById("InstallmentDuration"));});
 	var fetch="Categories";
 	$.ajax({
         url:'GetData', // bey call servlet getData
         type:'POST',
-        data: {fetch}, //<--- dah bytb3t lel servlet
-        success: function(data){ //<--- el galy men el servlet
+        data: {fetch}, // <--- dah bytb3t lel servlet
+        success: function(data){ // <--- el galy men el servlet
         	var Categories=data.split(",");
         	var CategoriesList=document.getElementById("Categories");
         	CategoriesList.options.length=0;
@@ -22,14 +25,18 @@ function CategoryChange(){// lma el category btt3'yr
 	var count=0;
 	var UsedFieldDivExists=document.getElementById("DivSub"+(count+1));
 	while (UsedFieldDivExists!=null){
-		//alert("da5l");
-		//$('#Sub'+(count+1)).selectpicker('delete');
+		// alert("da5l");
+		// $('#Sub'+(count+1)).selectpicker('delete');
 		UsedFieldDivExists.remove();
 		count++;
 		UsedFieldDivExists=document.getElementById("DivSub"+(count+1));	
-	} //byl3'y lw fe used fields alrdy mawgoda
+	} // byl3'y lw fe used fields alrdy mawgoda
 	var Category=document.getElementById("Categories");
-	var SelectedCategory=Category.options[Category.selectedIndex].text; // btgebly el selected category dlw2ty
+	var SelectedCategory=Category.options[Category.selectedIndex].text; // btgebly
+																		// el
+																		// selected
+																		// category
+																		// dlw2ty
 	var fetch="Subs";
 	$.ajax({
         url:'GetData',
@@ -48,7 +55,7 @@ function CategoryChange(){// lma el category btt3'yr
         	for (var i=1; i<Allsubs[0].split(":").length; i++){
         		dataList[i-1]=Allsubs[0].split(":")[i];
         	} // this loop to get subcategory 1 data
-        	//creating new select Boxes for each subcategory
+        	// creating new select Boxes for each subcategory
         	
         	// bn7ot el data bta3t awl sub category fe array esmo dataList
         	// bn7ot asamy el subcategories fe array esm sub categories
@@ -58,12 +65,12 @@ function CategoryChange(){// lma el category btt3'yr
         	for (var i=0;i<subCategories.length;i++){
         		if (subCategories[i].length <=0)
         			continue;
-        		//myParent.appendChild(document.createElement("br"));
+        		// myParent.appendChild(document.createElement("br"));
         		divContainer[i]=document.createElement("div");
         		divContainer[i].appendChild(document.createElement("br"));
         		divContainer[i].id="DivSub"+(i+1);
         		selectList[i]= document.createElement("select");
-            	//Create and append select list
+            	// Create and append select list
             	
         		selectList[i].id = "Sub"+(i+1);
         		selectList[i].classList.add("text-capitalize");
@@ -71,18 +78,18 @@ function CategoryChange(){// lma el category btt3'yr
         		selectList[i].setAttribute("data-style", "g-select");
         		selectList[i].setAttribute("data-width", "100%");
         		selectList[i].setAttribute("name", subCategories[i]);
-        		//var funcName="Sub"+(i+1)+"Change();";
+        		// var funcName="Sub"+(i+1)+"Change();";
         		var funcName="SubChange("+(i+1)+");";
         		selectList[i].setAttribute("onchange", funcName);
-            	//myParent.appendChild(selectList[i]);
+            	// myParent.appendChild(selectList[i]);
         		divContainer[i].appendChild(selectList[i]);
             	selectList[i].add(new Option("Pick "+subCategories[i]));
             	divContainer[i].appendChild(document.createElement("br"));
             	myParent.appendChild(divContainer[i]);
             	$('#Sub'+(i+1)).selectpicker('refresh');
-            	//myParent.appendChild(document.createElement("br")); 
+            	// myParent.appendChild(document.createElement("br"));
         	} // bt3ml dropdown list le kol subcategory
-        	//Fill the first SUB
+        	// Fill the first SUB
         	for (var i=0;i<dataList.length;i++){
         		selectList[0].add(new Option(dataList[i]));
         		$('#Sub1').selectpicker('refresh');
@@ -95,13 +102,14 @@ function CategoryChange(){// lma el category btt3'yr
 }
 
 function SubChange(count){
-	//var count=c;
+	// var count=c;
 	document.getElementById("ProductPrice").value="";
 	var elementExists = document.getElementById("Sub"+(count+1));
 	if (elementExists==null){
 		getPrice();
 		return;
-	} // shof lw fe subcategory b3d el enta wa2f 3leha, lw fe load el b3dha lw mafish e7sb el price
+	} // shof lw fe subcategory b3d el enta wa2f 3leha, lw fe load el b3dha lw
+		// mafish e7sb el price
 	var fetch="Sub_"+count;
 	var Category=document.getElementById("Categories");
 	var SelectedCategory=Category.options[Category.selectedIndex].text;
@@ -109,7 +117,9 @@ function SubChange(count){
 	list.fetch=fetch;
 	list.SelectedCategory=SelectedCategory;
 	for (var i=0;i<count;i++){
-		list["Sub"+(i+1)+"Name"]=document.getElementById("Sub"+(i+1)).getAttribute("name"); // esm el field
+		list["Sub"+(i+1)+"Name"]=document.getElementById("Sub"+(i+1)).getAttribute("name"); // esm
+																							// el
+																							// field
 		var Sub=document.getElementById("Sub"+(i+1));
 		var SelectedSub=Sub.options[Sub.selectedIndex].text;
 		list["SelectedSub"+(i+1)]=SelectedSub;
@@ -125,20 +135,21 @@ function SubChange(count){
         	Sub.options.length=0;
         	Sub.add(new Option("Pick "+Sub.getAttribute("name")));
             for (var i=0; i<data.split(",").length-1; i++){
-            	//if (!data.split(",")[i].includes(null))
+            	// if (!data.split(",")[i].includes(null))
             		Sub.add(new Option(data.split(",")[i]));
             }
             $('#Sub'+(count+1)).selectpicker('refresh');
             clearSelections(count);
         }
 });
-} // btb3t lel servlet el subcategories el e7na alrdy e5trnaha w betload el subcategory el b3deha 3la asasha
+} // btb3t lel servlet el subcategories el e7na alrdy e5trnaha w betload el
+	// subcategory el b3deha 3la asasha
 // w lw a5r sub category et3'yrt btgeeb el price 3latool
 
 
 function clearSelections(count){
 	var counter=count+2;
-	//=count+1;
+	// =count+1;
 	document.getElementById("ProductPrice").value="";
 	var elementExists = document.getElementById("Sub"+counter);
 	while (elementExists!=null){
@@ -148,7 +159,7 @@ function clearSelections(count){
 	elementExists = document.getElementById("Sub"+counter);
 	}
 	
-} //by3ml clear lel selctions b3d ma el subcategory btt3'yr
+} // by3ml clear lel selctions b3d ma el subcategory btt3'yr
 
 function getConfigs(){
 	var Category=document.getElementById("Categories");
@@ -158,15 +169,17 @@ function getConfigs(){
         type:'POST',
         data: {SelectedCategory},
         success: function(data){
-        	//0_Min_Insur_Months, 1_Max_Insur_Months, 2_Min_Insur_Coverage, 3_Max_Insur_Coverage, 4_Min_Inst_Months, 
-        	//5_Max_Inst_Months, 6_Inst_Downpayment, 7_Rate, 8_NewPriceMode, 9_UsedPriceMode, 10_Inst_interest_month
+        	// 0_Min_Insur_Months, 1_Max_Insur_Months, 2_Min_Insur_Coverage,
+			// 3_Max_Insur_Coverage, 4_Min_Inst_Months,
+        	// 5_Max_Inst_Months, 6_Inst_Downpayment, 7_Rate, 8_NewPriceMode,
+			// 9_UsedPriceMode, 10_Inst_interest_month
         	var InsuranceField=document.getElementById("InsuranceDuration");
         	var CoverageField=document.getElementById("CoveragePercentage");
         	InsuranceField.setAttribute("min",data.split(":")[0]);
         	InsuranceField.setAttribute("max",data.split(":")[1]);
         	CoverageField.setAttribute("min",data.split(":")[2]);
         	CoverageField.setAttribute("max",data.split(":")[3]);
-        	//document.querySelector('input[name="PaymentType"]:checked').value=="";
+        	// document.querySelector('input[name="PaymentType"]:checked').value=="";
         	var PaymentOptions = document.getElementsByName('PaymentType');
         	var InstallmentCont=document.getElementById("InstallmentCont");
         	if (data.split(":")[5]==0){
@@ -188,7 +201,7 @@ function getConfigs(){
         	if (cond=="new" && document.getElementById("NewPriceMode").value=="auto"){
         			document.getElementById("ProductPrice").readOnly="true";
         			}
-        	//ConditionChange();
+        	// ConditionChange();
         }
 });
 }
@@ -206,7 +219,7 @@ function ConditionChange(){
 		count++;
 		UsedFieldDivExists=document.getElementById("UsedFieldDiv"+(count+1));	
 	}
-	//clear used fields
+	// clear used fields
 	
 	if (Category.selectedIndex==0)
 		return;
@@ -229,12 +242,12 @@ function ConditionChange(){
         data: {SelectedCategory},
         success: function(data){
         	var AllFields=data.split("::");
-        	//creating new select Boxes for each subcategory
+        	// creating new select Boxes for each subcategory
         	var myParent = document.getElementById("UsedCont");
         	var divContainer=[];
         	var inputField=[];
         	for (var i=0;i<AllFields.length;i++){
-        		//myParent.appendChild(document.createElement("br"));
+        		// myParent.appendChild(document.createElement("br"));
         		if (AllFields[i].split(":")[0].length<=0)
         			continue;
         		divContainer[i]=document.createElement("div");
@@ -257,9 +270,9 @@ function ConditionChange(){
         	}
         	else{
         		document.getElementById("UsedCalculateButton").style.display="none";
-        		document.getElementById("ProductPrice").readOnly="false";
+        		document.getElementById("ProductPrice").readOnly=false;
         	}
-        	//getPrice();
+        	// getPrice();
         	
         }
 });}
@@ -308,7 +321,7 @@ function getPrice(){
 			var Used=document.getElementById("UsedField"+(i));
 			list["UsedField"+i+"Name"]=document.getElementById("UsedField"+i).getAttribute("name");
 			var SelectedUsed=Used.value;
-			//alert(SelectedUsed);
+			// alert(SelectedUsed);
 			list["SelectedUsedField"+i]=SelectedUsed;
 		}
 	}
@@ -320,10 +333,11 @@ function getPrice(){
         data: list,
         success: function(data){
         	if (data.length>20){
-        		alert(data);
-        		document.getElementById("ProductPrice").readOnly="false";
+        		//alert(data);
+        		document.getElementById("ProductPrice").readOnly=false;
         		}
         	else	{
+        		document.getElementById("ProductPrice").readOnly=true;
         		document.getElementById("ProductPrice").setAttribute('value',data);
         		document.getElementById("ProductPrice").value=data;
         		}
@@ -343,14 +357,16 @@ function InstallmentChange(){
 		InstallmentCont.style.display = "block";
 }
 
-function PriceChange(){
-	var inst_dp=document.getElementById("DownpaymentPerc").value;
-	document.getElementById("InstallmentDownpayment").min=document.getElementById("ProductPrice").value*(inst_dp/100);
-}
+ function PriceChange(){ //var
+ // inst_dp=document.getElementById("DownpaymentPerc").value;
+  //document.getElementById("InstallmentDownpayment").min=document.getElementById("ProductPrice").value*(inst_dp/100); 
+ }
+ 
 
-//console.dir(list);.
+// console.dir(list);.
 function CalculatePremium(){
-	//alert("Da5l hena");
+	CalculateInitialPremium();
+	// alert("Da5l hena");
 	var Category=document.getElementById("Categories");
 	var SelectedCategory=Category.options[Category.selectedIndex].text;
 	var Price=document.getElementById("ProductPrice").value;
@@ -359,20 +375,66 @@ function CalculatePremium(){
 	var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
 	var InstallmentDownpayment=document.getElementById("InstallmentDownpayment").value;
 	var InstallmentDuration=document.getElementById("InstallmentDuration").value;
+	if (PaymentType=="installment" && InstallmentDownpayment<document.getElementById("InstallmentDownpayment").min){
+		alert("Downpayment minimum should be "+document.getElementById("InstallmentDownpayment").min);
+		return;
+	}
 	$.ajax({
         url:'GetPremium',
         type:'POST',
-        data: list,
+        data: {SelectedCategory, Price, CoveragePercentage, InsuranceDuration, PaymentType, InstallmentDownpayment, InstallmentDuration},
         success: function(data){
-        	if (data.length>20){
-        		alert(data);
-        		document.getElementById("ProductPrice").readOnly="false";
-        		}
-        	else	{
-        		document.getElementById("ProductPrice").setAttribute('value',data);
-        		document.getElementById("ProductPrice").value=data;
-        		}
-        	PriceChange();
+        	//alert(data);
+        	if (PaymentType=="cash")
+        		document.getElementById("PremiumValue").value=data+" EGP";
+        	else
+            	document.getElementById("PremiumValue").value=data+" EGP / Month"
         }
 });
+}
+function CalculateInitialPremium(){
+	var Category=document.getElementById("Categories");
+	var SelectedCategory=Category.options[Category.selectedIndex].text;
+	var Price=document.getElementById("ProductPrice").value;
+	var CoveragePercentage=document.getElementById("CoveragePercentage").value;
+	var InsuranceDuration=document.getElementById("InsuranceDuration").value;
+	var PaymentType="cash";
+	var InstallmentDownpayment=document.getElementById("InstallmentDownpayment").value;
+	var InstallmentDuration=document.getElementById("InstallmentDuration").value;
+	$.ajax({
+        url:'GetPremium',
+        type:'POST',
+        data: {SelectedCategory, Price, CoveragePercentage, InsuranceDuration, PaymentType, InstallmentDownpayment, InstallmentDuration},
+        success: function(data){
+        	//alert(data);
+        	if (PaymentType=="cash")
+        		document.getElementById("InitialPremium").value=data+" EGP";
+        	else
+            	document.getElementById("InitialPremium").value=data+" EGP / Month"
+            document.getElementById("InstallmentDownpayment").min=data*(document.getElementById("DownpaymentPerc").value/100);
+        }
+});
+}
+
+
+
+function validateForm(){
+	//alert("true");
+	var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
+	var InstallmentDownpayment=document.getElementById("InstallmentDownpayment").value;
+	if (PaymentType=="installment" && InstallmentDownpayment<document.getElementById("InstallmentDownpayment").min){
+		alert("Downpayment minimum should be "+document.getElementById("InstallmentDownpayment").min);
+		return false;
+	}
+	return true;}
+//////////////ON CHANGE ///////////////////////////////////////////
+//document.getElementById("CoveragePercentage").onchange = function(){
+
+
+function CHANGE(element){
+
+	if (parseInt(element.value)<parseInt(element.min))
+		element.value=element.min;
+	else if (parseInt(element.value) > parseInt(element.max))
+		element.value=element.max;
 }
