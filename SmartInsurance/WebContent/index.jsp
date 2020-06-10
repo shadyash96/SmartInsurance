@@ -380,7 +380,7 @@ if (JSessionID!=null){
 											<button class="thm-btn" type="button" onclick="getPrice();">Calculate Price</button>
 										</div>
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
-											<input type="number" id="ProductPrice" name="ProductPrice"
+											<input readonly type="number" id="ProductPrice" name="ProductPrice"
 												placeholder="Product Current Price"
 												onchange="PriceChange();" required>
 										</div>

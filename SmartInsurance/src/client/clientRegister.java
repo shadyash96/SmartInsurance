@@ -69,7 +69,7 @@ public class clientRegister extends HttpServlet {
 			if(rs.next()) {
 			if (rs.getInt(1)==0) {
 				request.setAttribute("Error", "Email Already Exists");
-				request.getRequestDispatcher("clientLogin-Register.jsp").forward(request, response);
+				request.getRequestDispatcher("ClientLogin.jsp").forward(request, response);
 			}
 			else
 			{
@@ -80,6 +80,7 @@ public class clientRegister extends HttpServlet {
 				//pss.setString(3, SessionID);
 				pss.setInt(3, ClientID);
 				pss.execute();
+				request.setAttribute("Error", "You can now login to your account");
 				request.getRequestDispatcher("ClientLogin.jsp").forward(request, response);
 			}
 			}

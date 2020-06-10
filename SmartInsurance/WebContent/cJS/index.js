@@ -22,6 +22,10 @@ window.onload=function(){ // lma el page t5ls load
 	
 }
 function CategoryChange(){// lma el category btt3'yr
+	$('#ProductPrice').val('');
+	$('#CoveragePercentage').val('');
+	$('#InsuranceDuration').val('');
+	
 	var count=0;
 	var UsedFieldDivExists=document.getElementById("DivSub"+(count+1));
 	while (UsedFieldDivExists!=null){
@@ -365,6 +369,10 @@ function InstallmentChange(){
 
 // console.dir(list);.
 function CalculatePremium(){
+	if (document.getElementById("Categories").selectedIndex==0){
+		alert("Please Select a Category");
+		return false;
+	}
 	CalculateInitialPremium();
 	// alert("Da5l hena");
 	var Category=document.getElementById("Categories");
@@ -423,6 +431,10 @@ function validateForm(){
 	if (document.getElementById("PremiumValue").value.length<1){
 		alert("Premium will be calculated, submit again to confirm");
 		CalculatePremium();
+		return false;
+	}
+	if (document.getElementById("Categories").selectedIndex==0){
+		alert("Please Select a Category");
 		return false;
 	}
 	var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
