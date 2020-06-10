@@ -57,17 +57,18 @@ public class clientLogin extends HttpServlet {
 			rs.next();
 			if(rs.getString(1).equals("WrongPassword")) {
 				request.setAttribute("login_error", "Wrong Password");
-				request.getRequestDispatcher("clientLogin-Register.jsp").forward(request, response);
+				request.getRequestDispatcher("ClientLogin.jsp").forward(request, response);
 				c.close();
 				return;
 			}
 			else if(rs.getString(1).equals("UserDoesntExist")) {
 				request.setAttribute("login_error", "Email Doesn't Exist");
-				request.getRequestDispatcher("clientLogin-Register.jsp").forward(request, response);
+				request.getRequestDispatcher("ClientLogin.jsp").forward(request, response);
 				c.close();
 				return;
 			}
 			else {
+				c.prepareStatement("update Accounts set SessionID=' ' where SessionID='"+SessionID+"'");
 			PreparedStatement ps=c.prepareStatement("update Accounts set SessionID=? where Email=? and Password=?");
 			ps.setString(1, SessionID);
 			ps.setString(2, email);

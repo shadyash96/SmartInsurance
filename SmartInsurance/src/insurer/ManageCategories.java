@@ -35,7 +35,7 @@ public class ManageCategories extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("ManageCategories.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/Insurer/ManageClaims.jsp").forward(request, response);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class ManageCategories extends HttpServlet {
 			if (fetch.contentEquals("AddCategory")) {
 				if (CategoryStatus.equals("Exists")) {
 					request.setAttribute("Message", "Category already exists");
-					request.getRequestDispatcher("ManageCategories.jsp").forward(request, response);
+					request.getRequestDispatcher("WEB-INF/Insurer/ManageCategories.jsp").forward(request, response);
 					c.close();
 					return;
 				}
@@ -106,7 +106,7 @@ public class ManageCategories extends HttpServlet {
 					ps.executeBatch();
 				}
 				request.setAttribute("Message", "Category Added Successfully");
-				request.getRequestDispatcher("ManageCategories.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/Insurer/ManageCategories.jsp").forward(request, response);
 			}
 			else if (fetch.contentEquals("EditCategory")) {
 				float Rate=Float.parseFloat(request.getParameter("Rate"));
@@ -133,7 +133,7 @@ public class ManageCategories extends HttpServlet {
 				pss.setString(10, Category);
 				pss.execute();
 				request.setAttribute("Message", "Category Edited Successfully");
-				request.getRequestDispatcher("ManageCategories.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/Insurer/ManageCategories.jsp").forward(request, response);
 			}
 			c.close();
 		} catch (ClassNotFoundException | SocketException | SQLException e) {

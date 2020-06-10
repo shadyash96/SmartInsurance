@@ -87,8 +87,8 @@ public class GetPremium extends HttpServlet {
 					break;
 				}
 			}
-			float premium;
-			premium=(Float.parseFloat(Price)*(Rate/100));
+			int premium;
+			premium=(int) (Integer.parseInt(Price)*(Rate/100));
 			//System.out.println((int)premium);
 			if (PaymentType.equals("cash")) {
 				out.write(String.valueOf(premium));

@@ -37,7 +37,7 @@
 	================================================== -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
-<script src="cJS/index.js?v=3"></script>
+<script src="cJS/index.js?v=5"></script>
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
 <!--[if lt IE 9]>
@@ -435,7 +435,7 @@ if (JSessionID!=null){
 												onclick="CalculatePremium();">Calculate Premium</button>
 										</div>
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
-											<input id="PremiumValue" name="PremiumValue" type="text" value="" placeholder="Premium Quotation" readonly>
+											<input id="PremiumValue" name="PremiumValue" type="text" required value="" placeholder="Premium Quotation" readonly>
 										</div>
 										<%if (login.equals("Client")) {%>
 										<button type="submit" class="thm-btn sub">Submit Request</button>

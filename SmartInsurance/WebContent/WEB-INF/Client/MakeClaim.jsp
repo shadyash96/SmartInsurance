@@ -128,6 +128,9 @@
                       <option><%=InsuredItems.get(i)[0]+" > "+ InsuredItems.get(i)[1]%></option>
                       <%} %>
                     </select>
+                    <%if (InsuredItems.size()<1) {%>
+                    <h5>You don't have any insured items.</h5>
+                    <%} %>
               </div>
 <br>
               <div class="form-block">
@@ -168,7 +171,7 @@
 
           <div class="form-block">
             <label>Documents Link</label>
-            <input class="border required" type="text" name="DocumentsLink" />
+            <input class="border required" type="URL" name="DocumentsLink" />
           </div>
           <br/>
 

@@ -80,7 +80,7 @@ public class GetPrice extends HttpServlet {
 				ResultSet rs = ps.executeQuery();
 				while (rs.next())
 					if (rs.getString(1) != null)
-					out.write(rs.getString(1));
+					out.write(String.valueOf(rs.getInt(1)));
 			}
 			if (Condition.equals("used")) {
 				int UsedCount = Integer.parseInt(request.getParameter("UsedCount"));

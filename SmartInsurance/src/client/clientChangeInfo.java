@@ -75,7 +75,7 @@ public class clientChangeInfo extends HttpServlet {
 			}
 			
 			request.setAttribute("message", "Info Changed Successfully");
-			request.getRequestDispatcher("clientProfile.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Client/clientProfile.jsp").forward(request, response);
 			c.close();
 
 		} catch (SQLException | ClassNotFoundException e) {

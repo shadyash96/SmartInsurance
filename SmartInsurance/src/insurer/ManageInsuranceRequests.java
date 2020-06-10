@@ -35,7 +35,7 @@ public class ManageInsuranceRequests extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("InsuranceRequests.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/Insurer/InsuranceRequests.jsp").forward(request, response);
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class ManageInsuranceRequests extends HttpServlet {
 			if (rs.getString(1).equals("Doesnt")) {
 				c.close();
 				request.setAttribute("Message", "Request ID Doesn't Exist");
-				request.getRequestDispatcher("InsuranceRequests.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/Insurer/InsuranceRequests.jsp").forward(request, response);
 				return;
 			}
 			if (fetch.equals("Approve")) {
@@ -67,7 +67,7 @@ public class ManageInsuranceRequests extends HttpServlet {
 				ps.setInt(1, RequestID);
 				ps.execute();	
 			}
-			request.getRequestDispatcher("InsuranceRequests.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Insurer/InsuranceRequests.jsp").forward(request, response);
 			c.close();
 		} catch (ClassNotFoundException | SocketException | SQLException e) {
 			// TODO Auto-generated catch block

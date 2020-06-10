@@ -37,7 +37,7 @@ public class clientRegister extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("clientLogin-Register.jsp").forward(request, response);
+		request.getRequestDispatcher("ClientLogin.jsp").forward(request, response);
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -74,13 +74,13 @@ public class clientRegister extends HttpServlet {
 			else
 			{
 				ClientID=rs.getInt(1);
-				PreparedStatement pss=c.prepareStatement("insert into Accounts (Email, Password, SessionID, Type, Client_ID) values (?,?,?,'Client',?);");
+				PreparedStatement pss=c.prepareStatement("insert into Accounts (Email, Password, Type, Client_ID) values (?,?,'Client',?);");
 				pss.setString(1, email);
 				pss.setString(2, password);
-				pss.setString(3, SessionID);
-				pss.setInt(4, ClientID);
+				//pss.setString(3, SessionID);
+				pss.setInt(3, ClientID);
 				pss.execute();
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("ClientLogin.jsp").forward(request, response);
 			}
 			}
 			

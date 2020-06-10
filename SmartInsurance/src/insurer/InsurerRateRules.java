@@ -64,11 +64,11 @@ public class InsurerRateRules extends HttpServlet {
 				rs.next();
 				if (rs.getString(1).equals("Exists")) {
 					request.setAttribute("Message", "Rule already exists");
-					request.getRequestDispatcher("ConfigureRates.jsp").forward(request, response);
+					request.getRequestDispatcher("WEB-INF/Insurer/ConfigureRates.jsp").forward(request, response);
 				}
 				else {
 					request.setAttribute("Message", "Rule Added Successfully");
-					request.getRequestDispatcher("ConfigureRates.jsp").forward(request, response);
+					request.getRequestDispatcher("WEB-INF/Insurer/ConfigureRates.jsp").forward(request, response);
 				}
 			}
 			else if (fetch.equals("DeleteRule")) {
@@ -80,11 +80,11 @@ public class InsurerRateRules extends HttpServlet {
 				rs.next();
 				if (rs.getString(1).equals("Doesnt")) {
 					request.setAttribute("Message", "Rule ID Doesn't Exist");
-					request.getRequestDispatcher("ConfigureRates.jsp").forward(request, response);
+					request.getRequestDispatcher("WEB-INF/Insurer/ConfigureRates.jsp").forward(request, response);
 				}
 				else {
 					request.setAttribute("Message", "Rule Deleted Successfully");
-					request.getRequestDispatcher("ConfigureRates.jsp").forward(request, response);
+					request.getRequestDispatcher("WEB-INF/Insurer/ConfigureRates.jsp").forward(request, response);
 				}
 			}
 			c.close();

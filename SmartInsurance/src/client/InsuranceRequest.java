@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +36,7 @@ public class InsuranceRequest extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("WEB-INF/Client/insuranceRequests.jsp").forward(request, response);
 	}
 
 	/**
@@ -69,7 +70,7 @@ public class InsuranceRequest extends HttpServlet {
 			ps.setInt(1, client_ID);
 			ps.setString(2, Category);
 			ps.setInt(3, item_ID);
-			ps.setInt(4, Integer.parseInt(ProductPrice.split(".")[0]));
+			ps.setInt(4, Integer.parseInt(ProductPrice));
 			ps.setInt(5, Integer.parseInt(CoveragePercentage));
 			ps.setInt(6, Integer.parseInt(InsuranceDuration));
 			ps.setString(7, Condition);
@@ -83,8 +84,9 @@ public class InsuranceRequest extends HttpServlet {
 				ps.setNull(10, java.sql.Types.INTEGER);
 			}
 			ps.setInt(11, Integer.parseInt(PremiumValue.split(" ")[0]));
-				
+			ps.execute();
 			c.close();
+			request.getRequestDispatcher("WEB-INF/Client/insuranceRequests.jsp").forward(request, response);
 		} catch (ClassNotFoundException | SocketException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -95,24 +97,29 @@ public class InsuranceRequest extends HttpServlet {
 	
 	int getItemID(Connection c, HttpServletRequest request, String Category) throws SQLException {
 		int item_ID = 0;
-		String subCategoriesNames[] = {},subCategoriesValues[]= {};
+	    //String subCategoriesNames[] = {},subCategoriesValues[]= {};
+		ArrayList<String> subCategoriesNames = new ArrayList<String>(),subCategoriesValues = new ArrayList<String>();
 		PreparedStatement ps=c.prepareStatement("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='products_"+Category+"' and ORDINAL_POSITION > 3 order by ORDINAL_POSITION asc;");
 		ResultSet rs=ps.executeQuery();
 		int count=0;
 		// to get sub categories names and values////
 		while (rs.next()) {
-			subCategoriesNames[count]=rs.getString(1);
-			subCategoriesValues[count]=request.getParameter(subCategoriesNames[count]);
+			//subCategoriesNames[count]=rs.getString(1);
+			subCategoriesNames.add(rs.getString(1));
+			//subCategoriesValues[count]=request.getParameter(subCategoriesNames[count]);
+			subCategoriesValues.add(request.getParameter(subCategoriesNames.get(count)));
+			count++;
 		}
 		//to get Item ID
 		String whereStat=" ";
-		for (int i=0;i<subCategoriesNames.length;i++) {
+		for (int i=0;i<subCategoriesNames.size();i++) {
 			if (i==0)
-				whereStat+=subCategoriesNames[i]+"='"+subCategoriesValues[i]+"' ";
+				whereStat+=subCategoriesNames.get(i)+"='"+subCategoriesValues.get(i)+"' ";
 			else
-				whereStat+="and "+subCategoriesNames[i]+"='"+subCategoriesValues[i]+"' ";
+				whereStat+="and "+subCategoriesNames.get(i)+"='"+subCategoriesValues.get(i)+"' ";
 		}
-		ps=c.prepareStatement("select top(1) item_ID from products_"+Category+whereStat);
+		//System.out.println(whereStat);
+		ps=c.prepareStatement("select top(1) item_ID from products_"+Category+" where "+whereStat);
 		rs=ps.executeQuery();
 		if (rs.next())
 			item_ID=rs.getInt(1);

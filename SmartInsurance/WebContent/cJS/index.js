@@ -420,6 +420,11 @@ function CalculateInitialPremium(){
 
 function validateForm(){
 	//alert("true");
+	if (document.getElementById("PremiumValue").value.length<1){
+		alert("Premium will be calculated, submit again to confirm");
+		CalculatePremium();
+		return false;
+	}
 	var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
 	var InstallmentDownpayment=document.getElementById("InstallmentDownpayment").value;
 	if (PaymentType=="installment" && InstallmentDownpayment<document.getElementById("InstallmentDownpayment").min){
