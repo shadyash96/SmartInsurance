@@ -32,7 +32,7 @@ ResultSet rs=ps.executeQuery();
 rs.next();
 if (rs.getString(1).equals("Exists"))
 	login="loggedIN";
-
+c.close();
 %>
 
 

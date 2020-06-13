@@ -43,7 +43,9 @@
     <div id="wrapper" class="wrapper bg-ash">
       <!-- Header Menu Area Start Here -->
        
-        
+          <jsp:include page="InsurerSideMenu.jsp">
+    				 <jsp:param name="active" value="UserInfo"/>
+    				</jsp:include>
     		
           <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
