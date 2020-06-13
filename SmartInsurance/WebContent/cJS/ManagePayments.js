@@ -108,7 +108,7 @@ function MakeInitialPayment(){
         type:'POST',
         data: {fetch, RequestID},
         success: function(data){
-        	getClientInfo();
+        	//getClientInfo();
         	document.getElementById("Message").innerHTML=data;
         	setTimeout(function(){
           		document.getElementById("Message").innerHTML="";

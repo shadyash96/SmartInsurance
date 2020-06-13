@@ -60,6 +60,7 @@ public class clientMakeClaim extends HttpServlet {
 			ps.setString(4, Documents);
 			ps.execute();
 			response.sendRedirect("claimRedirect.jsp");
+			c.close();
 		} catch (ClassNotFoundException | SocketException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

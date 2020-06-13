@@ -101,7 +101,7 @@ public class clientRegister extends HttpServlet {
 				}
 				c.close();
 			}
-			
+			c.close();
 		} catch (ClassNotFoundException | SocketException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

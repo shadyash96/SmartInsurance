@@ -112,6 +112,7 @@ public class GetPrice extends HttpServlet {
 						// System.out.println("---predicted value: " +
 						// unlabeled.classAttribute().value((int)clsLabel));
 					}
+					c.close();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					out.write("Cant use AI due to limitations in dataset. Enter the price manually");
