@@ -273,15 +273,15 @@ $( document ).ready(function(){
                     </div>
                     <div class="col-6-xxxl col-lg-6 col-6 form-group">
                         <label>Min coverage</label>
-                        <input name="MinCoverage" type="number" placeholder="#" class="form-control">
+                        <input name="MinCoverage" required type="number" placeholder="#" class="form-control">
                     </div>
                     <div class="col-6-xxxl col-lg-6 col-6 form-group">
                         <label>Max coverage*</label>
-                        <input name="MaxCoverage" type="number" placeholder="#" class="form-control">
+                        <input name="MaxCoverage" required type="number" placeholder="#" class="form-control">
                     </div>
                     <div class="col-6-xxxl col-lg-6 col-6 form-group">
                         <label>Min installment months*</label>
-                        <input name="MinInstMonths" type="number" placeholder="#" class="form-control">
+                        <input name="MinInstMonths" required type="number" placeholder="#" class="form-control">
                     </div>
                     <div class="col-6-xxxl col-lg-6 col-6 form-group">
                         <label>Max installment months*</label>
@@ -289,11 +289,11 @@ $( document ).ready(function(){
                     </div>
                      <div class="col-6-xxxl col-lg-6 col-6 form-group">
                         <label>Installment minimum downpayment</label>
-                        <input type="number" step="any" name="InstallmentDownpayment" placeholder="%" class="form-control">
+                        <input type="number" value="0" required step="any" name="InstallmentDownpayment" placeholder="%" class="form-control">
                     </div>
                     <div class="col-6-xxxl col-lg-6 col-6 form-group">
                         <label>Installment interest per month</label>
-                        <input type="number" name="InstallmentInterest" placeholder="Enter 0 to Disable" class="form-control">
+                        <input type="number" name="InstallmentInterest" required placeholder="Enter 0 to Disable" class="form-control">
                     </div>
                   </div>
                   </div>

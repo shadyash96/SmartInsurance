@@ -1,10 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+   <%@ page import="connection.DatabaseConnection"%>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.util.ArrayList"%>
 
 <!DOCTYPE html>
 <html lang="en">
 
+<%Connection c= DatabaseConnection.getConnection();
+Cookie[] Allcookies = null;
+Allcookies = request.getCookies();
+String JSessionID = null;
+Cookie JSession = null;
+if (Allcookies != null) {
+	for (int i = 0; i < Allcookies.length; i++) {
+		if (Allcookies[i].getName().equals("JSESSIONID")) {
+	JSession = Allcookies[i];
+		}
+	}
+}
+if (JSession != null)
+	JSessionID = JSession.getValue();
+String login="null";
 
+PreparedStatement ps=c.prepareStatement("if exists (Select * from accounts where SessionID=?) select 'Exists' else select 'Doesnt'");
+ps.setString(1,JSessionID);
+ResultSet rs=ps.executeQuery();
+rs.next();
+if (rs.getString(1).equals("Exists"))
+	login="loggedIN";
+
+%>
 
 
 <head>
@@ -94,6 +123,10 @@
 						</div>
 						<form action="InsurerLogin" method="post">
 							<div class="form_group">
+							<%if (login.equals("loggedIN")) {%>
+						<h3><a href="Logout">You already logged in, click here to logout</a></h3>
+						<%}
+						else{%>
 								<label>Email</label>
 								<div class="input_group">
 									<input id="email" name="email" type="email" placeholder="email@contact.com" required>
@@ -109,6 +142,7 @@
 									<input id="password" name="password" type="password" required placeholder="********"> <i
 										class="fa fa-lock" aria-hidden="true"></i>
 								</div>
+								
 								<!-- End of .input_group -->
 								<h5 style="color:red;">${login_error}</h5>
 							</div>
@@ -118,6 +152,7 @@
 								<a href="#" class="float_right">Forgot Password?</a>
 							</div> -->
 							<button type="submit" class="color1_bg tran3s">Login now</button>
+							<%} %>
 						</form>
 					</div>
 					<!-- End of .login_form -->

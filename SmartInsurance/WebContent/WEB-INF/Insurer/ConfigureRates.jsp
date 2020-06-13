@@ -19,7 +19,7 @@ while (rs.next()){
 	temp[0]=String.valueOf(rs.getInt(1));
 	temp[1]=rs.getString(2);
 	temp[2]=rs.getString(3);
-	temp[3]=String.valueOf(rs.getString(4));
+	temp[3]=String.valueOf(rs.getInt(4))+(temp[2].equals("Duration")?" Months":"%");
 	temp[4]=String.valueOf(rs.getFloat(5));
 	RateRules.add(temp);
 }
@@ -154,7 +154,7 @@ c.close();%>
                                       </div>
                                         <div class="col-12-xxxl col-lg-12 col-12 form-group">
                                             <label>If less than  *</label>
-                                            <input required name="LessThan" type="number" placeholder="" class="form-control">
+                                            <input required step="1" name="LessThan" type="number" placeholder="" class="form-control">
                                         </div>
                                         <div class="col-12-xxxl col-lg-12 col-12 form-group">
                                             <label>Add Rate *</label>

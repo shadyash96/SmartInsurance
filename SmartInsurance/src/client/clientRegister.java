@@ -58,31 +58,48 @@ public class clientRegister extends HttpServlet {
 		try {
 			Connection c=DatabaseConnection.getConnection();
 			//if exists(select username from cus_accounts where username=?)  select 0 else insert into cus_accounts (Name, Email, Address, Phone, Region, Username, Password) output inserted.Cus_ID values (?,?,?,?,?,?,?);
-			PreparedStatement ps=c.prepareStatement("if exists (select Email from Accounts where Email=?) select 0 else insert into Clients (Name, Address, Phone_No, Identification_no, Email) output Inserted.Client_ID values (?,?,?,?,?);");
+			PreparedStatement ps=c.prepareStatement("if exists (select Email from Accounts where Email=?) "+
+			"select 0 else if exists (select * from Clients where Identification_no=?) "+
+			"select 1 else if exists (select * from Clients where Phone_No=?) select 2 "+
+			"else select 3");
 			ps.setString(1, email);
-			ps.setString(2, name);
-			ps.setString(3, address);
-			ps.setString(4, phoneNo);
-			ps.setString(5, NationalID);
-			ps.setString(6, email);
+			ps.setString(2, NationalID);
+			ps.setString(3, phoneNo);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
-			if (rs.getInt(1)==0) {
-				request.setAttribute("Error", "Email Already Exists");
-				request.getRequestDispatcher("ClientLogin.jsp").forward(request, response);
-			}
-			else
-			{
-				ClientID=rs.getInt(1);
-				PreparedStatement pss=c.prepareStatement("insert into Accounts (Email, Password, Type, Client_ID) values (?,?,'Client',?);");
-				pss.setString(1, email);
-				pss.setString(2, password);
-				//pss.setString(3, SessionID);
-				pss.setInt(3, ClientID);
-				pss.execute();
-				request.setAttribute("Error", "You can now login to your account");
-				request.getRequestDispatcher("ClientLogin.jsp").forward(request, response);
-			}
+				if (rs.getInt(1)==0) {
+					request.setAttribute("Error", "Email Already Exists");
+					request.getRequestDispatcher("ClientLogin.jsp").forward(request, response);
+				}
+				else if (rs.getInt(1)==1) {
+					request.setAttribute("Error", "National ID Already Exists");
+					request.getRequestDispatcher("ClientLogin.jsp").forward(request, response);
+				}
+				else if (rs.getInt(1)==2) {
+					request.setAttribute("Error", "Phone Number already exists");
+					request.getRequestDispatcher("ClientLogin.jsp").forward(request, response);
+				}
+				else
+				{
+					ps=c.prepareStatement("insert into Clients (Name, Address, Phone_No, Identification_no, Email) output Inserted.Client_ID values (?,?,?,?,?)");
+					ps.setString(1, name);
+					ps.setString(2, address);
+					ps.setString(3, phoneNo);
+					ps.setString(4, NationalID);
+					ps.setString(5, email);
+					rs=ps.executeQuery();
+					rs.next();
+					ClientID=rs.getInt(1);
+					PreparedStatement pss=c.prepareStatement("insert into Accounts (Email, Password, Type, Client_ID) values (?,?,'Client',?);");
+					pss.setString(1, email);
+					pss.setString(2, password);
+					//pss.setString(3, SessionID);
+					pss.setInt(3, ClientID);
+					pss.execute();
+					request.setAttribute("Error", "You can now login to your account");
+					request.getRequestDispatcher("ClientLogin.jsp").forward(request, response);
+				}
+				c.close();
 			}
 			
 		} catch (ClassNotFoundException | SocketException | SQLException e) {

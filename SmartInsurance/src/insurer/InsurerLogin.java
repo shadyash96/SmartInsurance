@@ -62,7 +62,7 @@ public class InsurerLogin extends HttpServlet {
 					System.out.println(email);
 					String password= request.getParameter("password");
 					String SessionID=request.getSession().getId();
-					PreparedStatement pss=c.prepareStatement("if exists (select * from Accounts where Email=?) begin if exists (select * from Accounts where Email=? and Password=?) select 'GO' else select 'WrongPassword' end else select 'UserDoesntExist'");
+					PreparedStatement pss=c.prepareStatement("if exists (select * from Accounts where Email=? and Type='Insurer') begin if exists (select * from Accounts where Email=? and Password=?) select 'GO' else select 'WrongPassword' end else select 'UserDoesntExist'");
 					pss.setString(1, email);
 					pss.setString(2, email);
 					pss.setString(3, password);

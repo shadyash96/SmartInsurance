@@ -35,7 +35,7 @@ public class InsurerRateRules extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("ConfigureRates.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/Insurer/ConfigureRates.jsp").forward(request, response);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class InsurerRateRules extends HttpServlet {
 			if (fetch.equals("AddRule")) {
 				String Category=request.getParameter("Categories");
 				String Type=(request.getParameter("Type").equals("Duration")?"Duration":"Percentage");
-				int LessThan=Integer.parseInt(request.getParameter("LessThan"));
+				int LessThan=(int)(Float.parseFloat(request.getParameter("LessThan")));
 				float AddRate=Float.parseFloat(request.getParameter("AddRate"));
 				PreparedStatement ps = c.prepareStatement("if exists (select * from RateRules where Category=? and Type=? and Less_Than=?) select 'Exists' "+
 				"else insert into RateRules (Category,Type,Less_Than,Rate_Increase) values (?,?,?,?); select 'Added';");

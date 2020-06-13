@@ -152,7 +152,7 @@ public class ManagePayments extends HttpServlet {
 				ps.setInt(1, RequestID);
 				ResultSet rs=ps.executeQuery();
 				if(rs.next()) {
-					if (rs.getString(1).equals("Cash")) 
+					if (rs.getString(1).equalsIgnoreCase("Cash")) 
 						out.write(String.valueOf(rs.getInt(3)));
 					else
 						out.write(String.valueOf(rs.getInt(2)));
