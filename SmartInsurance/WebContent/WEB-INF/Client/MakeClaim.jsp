@@ -171,7 +171,7 @@
 
           <div class="form-block">
             <label>Documents Link</label>
-            <input class="border required" type="URL" name="DocumentsLink" />
+            <input class="border required" type="text" name="DocumentsLink" />
           </div>
           <br/>
 
