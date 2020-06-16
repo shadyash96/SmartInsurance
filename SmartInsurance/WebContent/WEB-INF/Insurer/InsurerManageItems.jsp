@@ -14,7 +14,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Smart insurance</title>
+    <title>Smart Insurance</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -110,13 +110,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                
                 <!-- All Subjects Area End Here -->
 
-            </div>
-        </div>
-        <!-- Page Area End Here -->
-    </div>
+
     <!-- jquery-->
     <script src="insurerCSS/js2/jquery-3.3.1.min.js"></script>
     <!-- Plugins js -->

@@ -34,7 +34,7 @@ c.close();%>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="img2/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="insurerCSS/img2/favicon.png">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="insurerCSS/css2/normalize.css">
     <!-- Main CSS -->
@@ -226,14 +226,11 @@ c.close();%>
                     </div>
                 </div>
                 <!-- All Subjects Area End Here -->
-                <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
-                </footer>
+                
             </div>
         </div>
         <!-- Page Area End Here -->
-    </div>
+    
     <!-- jquery-->
     <script src="insurerCSS/js2/jquery-3.3.1.min.js"></script>
     <!-- Plugins js -->

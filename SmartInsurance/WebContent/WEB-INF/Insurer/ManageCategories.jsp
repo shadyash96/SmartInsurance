@@ -367,14 +367,9 @@ $( document ).ready(function(){
 
                 </div>
                 <!-- All Subjects Area End Here -->
-                <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
-                </footer>
             </div>
         </div>
         <!-- Page Area End Here -->
-    </div>
     <!-- jquery-->
     <script src="insurerCSS/js2/jquery-3.3.1.min.js"></script>
     <!-- Plugins js -->

@@ -33,7 +33,7 @@ c.close();%>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Account Setting</title>
+    <title>Smart Insurance</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -154,13 +154,9 @@ c.close();%>
                     </div>
                 </div>
                 <!-- Account Settings Area End Here -->
-                <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
-                </footer>
             </div>
         </div>
         <!-- Page Area End Here -->
-    </div>
     
     <!-- jquery-->
     <script src="insurerCSS/js2/jquery-3.3.1.min.js"></script>
