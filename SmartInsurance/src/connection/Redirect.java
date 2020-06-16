@@ -58,6 +58,11 @@ public class Redirect extends HttpServlet {
 		String Type=request.getParameter("type");
 		String SessionID=request.getSession().getId();
 		String page=request.getParameter("page");
+		if (Type.equalsIgnoreCase("UserInfo")) {
+			String ClientID=request.getParameter("ClientID");
+			request.getRequestDispatcher("WEB-INF/Insurer/UserInfo.jsp?ClientID="+ClientID).forward(request, response);
+			return;
+		}
 
 		try {
 		Connection c=DatabaseConnection.getConnection();

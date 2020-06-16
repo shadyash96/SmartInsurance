@@ -137,7 +137,7 @@ ArrayList<String[]> Requests=GetInfo.getInsuranceRequests();
                                             <tr>
 
                                                 <td style="vertical-align: middle;"><%=Requests.get(i)[10] %></td>
-                                                <td style="vertical-align: middle;"><%=Requests.get(i)[12] %></td>
+                                                <td style="vertical-align: middle;"><a style="cursor:pointer; color:blue;" onclick="UserRedirect('<%=Requests.get(i)[12] %>')"><%=Requests.get(i)[12] %></a></td>
                                                 <td style="vertical-align: middle;"><%=Requests.get(i)[0] %> > <%=Requests.get(i)[1] %></td>
                                                 <td style="vertical-align: middle;"><%=Requests.get(i)[2] %></td>
                                                 <td style="vertical-align: middle;"><%=Requests.get(i)[3] %>%</td>

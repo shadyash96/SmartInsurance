@@ -92,4 +92,18 @@ public class AutoUpdateCars {
 
       return Cars;
    }
+   
+   public static String getStatus() {
+	   if (result==null)
+		   return "inactive";
+	   else
+		   return "active";
+   }
+   
+   public static void deactivate() {
+	   if (result!=null)
+	   result.cancel(true);
+	   result=null;
+   }
+   
 }

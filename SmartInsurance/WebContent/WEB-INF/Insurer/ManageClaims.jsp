@@ -141,7 +141,7 @@ ArrayList<String[]> Requests=GetInfo.getClaimRequests();
                                         <%for (int i=0;i<Requests.size();i++){ %>
                                             <tr>
                                                 <td><%=Requests.get(i)[9] %></td>
-                                                <td><%=Requests.get(i)[4] %></td>
+                                                <td><a style="cursor:pointer; color:blue;" onclick="UserRedirect('<%=Requests.get(i)[4] %>')"><%=Requests.get(i)[4] %></a></td>
                                                 <td><%=Requests.get(i)[0]+" > "+Requests.get(i)[1]%></td>
                                                 <td><%=Requests.get(i)[5] %></td>
                                                 <td><%=Requests.get(i)[7] %></td>
@@ -181,6 +181,7 @@ ArrayList<String[]> Requests=GetInfo.getClaimRequests();
     <script src="insurerCSS/js2/jquery.dataTables.min.js"></script>
     <!-- Custom Js -->
     <script src="insurerCSS/js2/main.js"></script>
+    <script src="cJS/Redirect.js?v=1"></script>
 
 </body>
 

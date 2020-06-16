@@ -48,28 +48,13 @@ Connection c;
     //out.println(conn.toString().indexOf("sqlite")!=-1?"true":"false");
     System.out.println("Connection to SQLite has been established.");
  %>
-	<%PreparedStatement ps = c.prepareStatement("select * from Clients",ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
- ResultSet rs;
-
-	 rs=ps.executeQuery();
-
-
-
-
-		
-		while (rs.next()){
-			out.println(rs.getString(1));
-		}
-		rs.close();
-		ps.close();
-		c.close();%>
-
-	<button onclick="test()">Update Database 1</button>
-
+	<button onclick="ActivateCarUpdate()">Update Database 1</button>
+<button onclick="DeactivateCarUpdate()">Deactivate</button>
+<%=AutoUpdateCars.getStatus() %>
 
 </body>
 <script>
-function test(){
+function ActivateCarUpdate(){
 	 $.ajax({
 		 url : 'CallCarUpdate',
          type : 'POST',
@@ -77,6 +62,18 @@ function test(){
              alert("Car Prices Are Being Updated Every 6 hours");
          }
      });
+}
+
+function DeactivateCarUpdate(){
+	var fetch="deactivate";
+	 $.ajax({
+		 url : 'CallCarUpdate',
+        type : 'POST',
+        data: {fetch},
+        success : function() {
+            alert("Car Prices Won't update Automatically");
+        }
+    });
 }
 </script>
 </html>

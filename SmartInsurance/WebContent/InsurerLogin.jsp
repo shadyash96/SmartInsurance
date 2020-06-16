@@ -157,8 +157,89 @@ c.close();
 					</div>
 					<!-- End of .login_form -->
 
-					
-					
+					<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 register_form">
+						<div class="theme-title">
+							<h2>Register Here</h2>
+						</div>
+						<form action="InsurerRegister" method="post">
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+									<div class="form_group">
+										<label>Email Address</label>
+										<div class="input_group">
+											<input name="email" id="email" type="email" required> <i class="fa fa-envelope-o"
+												aria-hidden="true"></i>
+										</div>
+										<!-- End of .input_group -->
+									</div>
+									
+									<div class="form_group">
+										<label>National ID</label>
+										<div class="input_group">
+											<input name="NationalID" id="NationalID" pattern="[0-9]{14,14}" required title="Enter a valid ID"> 
+											<i class="fa fa-user" aria-hidden="true"></i>
+										</div>
+										<!-- End of .input_group -->
+									</div>
+									<!-- End of .form_group -->
+
+									<div class="form_group">
+										<label>Password</label>
+										<div class="input_group">
+											<input id="password" name="password" type="password" pattern=".{5,}" required title="Password min length 5 characters." > <i class="fa fa-lock"
+												aria-hidden="true"></i>
+										</div>
+										<!-- End of .input_group -->
+									</div>
+									<div class="form_group">
+										<label>Token</label>
+										<div class="input_group">
+											<input name="Token" id="Token" type="text" required> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+										</div>
+										<!-- End of .input_group -->
+									</div>
+									<!-- End of .form_group -->
+
+									
+									<!-- End of .form_group -->
+								</div>
+
+								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+									<div class="form_group">
+										<label>Name</label>
+										<div class="input_group">
+											<input id="name" name="name" type="text" required> <i class="fa fa-user" aria-hidden="true"></i>
+										</div>
+										<!-- End of .input_group -->
+									</div>
+									<div class="form_group">
+										<label>Phone Number</label>
+										<div class="input_group">
+											<input id="phoneNo" name="phoneNo" type="text" pattern="[0-9]{11,11}" required title="Enter a valid Phone Number"> <i class="fa fa-phone"
+												aria-hidden="true"></i>
+										</div>
+										<!-- End of .input_group -->
+									</div>
+									<!-- End of .form_group -->
+
+									<div class="form_group">
+										<label>Address</label>
+										<div class="input_group">
+											<input name="address" id="address" type="text" required> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+										</div>
+										<!-- End of .input_group -->
+									</div>
+									<!-- End of .form_group -->
+									
+									<!-- End of .form_group -->
+								</div>
+							</div>
+							<!-- End of .row -->
+
+						     <h4 style="color:red;">${Error}</h4>
+							<button name="fetch" value="Register" class="color1_bg tran3s">Create Account</button>
+						</form>
+					</div>
 					
 					
 					

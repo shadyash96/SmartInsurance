@@ -117,7 +117,7 @@ if (JSessionID!=null){
 							<li><a href="faq-page.html">Faq Page</a></li>
 							<li><a href="404-page.html">404 Page</a></li>
 						</ul></li>
-					<li class="dropdown"><a href="insurance.html">Client
+					<li class="dropdown"><a href="#">Client
 							Portal</a>
 						<ul class="submenu">
 						<% if (login.equals("Client")){%>

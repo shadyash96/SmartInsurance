@@ -16,7 +16,12 @@ public class CallCarUpdate extends HttpServlet {
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
   
+	   String fetch=request.getParameter("fetch");
+	   if (fetch!=null && fetch.equals("deactivate"))
+		   AutoUpdateCars.deactivate();
+	   else
          AutoUpdateCars.initiate();
+         
      
 
    }

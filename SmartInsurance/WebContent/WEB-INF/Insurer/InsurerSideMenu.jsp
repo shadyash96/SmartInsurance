@@ -1,4 +1,33 @@
  <%String active=request.getParameter("active");%>
+ <%@ page import="connection.DatabaseConnection"%>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Connection"%>
+
+<%Connection c= DatabaseConnection.getConnection();
+Cookie[] Allcookies = null;
+Allcookies = request.getCookies();
+String JSessionID = null;
+Cookie JSession = null;
+if (Allcookies != null) {
+	for (int i = 0; i < Allcookies.length; i++) {
+		if (Allcookies[i].getName().equals("JSESSIONID")) {
+	JSession = Allcookies[i];
+		}
+	}
+}
+if (JSession != null)
+	JSessionID = JSession.getValue();
+String email;
+int master=0;
+PreparedStatement ps=c.prepareStatement("select Email, Master from accounts where SessionID=?;");
+ps.setString(1,JSessionID);
+ResultSet rs=ps.executeQuery();
+rs.next();
+email=rs.getString(1);
+master=rs.getInt(2);
+c.close(); %>
  <!-- Header Menu Area Start Here -->
         <div class="navbar navbar-expand-md header-menu-one bg-light">
             <div class="nav-bar-header-one">
@@ -43,7 +72,7 @@
                         <a class="navbar-nav-link dropdown-toggle" style="cursor:pointer;" role="button" data-toggle="dropdown"
                             aria-expanded="false">
                             <div class="admin-title">
-                                <h5 class="item-title">Ahmed Zakaria</h5>
+                                <h5 class="item-title"><%=email %></h5>
                                 <span>Admin</span>
                             </div>
                             <div class="admin-img">
@@ -52,14 +81,12 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="item-header">
-                                <h6 class="item-title">Ahmed Zakaria</h6>
+                                <h6 class="item-title"><%=email %></h6>
                             </div>
                             <div class="item-content">
                                 <ul class="settings-list">
-                                    <li><a style="cursor:pointer;"><i class="flaticon-user"></i>My Profile</a></li>
-                                    <li><a style="cursor:pointer;"><i class="flaticon-list"></i>Task</a></li>
-                                    <li><a style="cursor:pointer;"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
-                                    <li><a href="login.html"><i class="flaticon-turn-off"></i>Log Out</a></li>
+                                    <li><a href="Logout"><i class="flaticon-turn-off"></i>Log Out</a></li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -93,6 +120,10 @@
                                     class="flaticon-open-book"></i><span <%=(active.equals("ManageItems")?"class=\"menu-active\"":"")%>>Manage Items</span></a>
                         </li>
                         <li class="nav-item">
+                            <a style="cursor:pointer;" onclick="redirect('UserInfo','Insurer')"  class="nav-link <%=(active.equals("UserInfo")?"menu-active":"")%>"><i
+                                    class="flaticon-open-book"></i><span <%=(active.equals("UserInfo")?"class=\"menu-active\"":"")%>>User Info</span></a>
+                        </li>
+                        <li class="nav-item">
                             <a style="cursor:pointer;" onclick="redirect('ConfigureRates','Insurer')" class="nav-link <%=(active.equals("ConfigureRates")?"menu-active":"")%>"><i class="flaticon-calendar"></i>
                             <span <%=(active.equals("ConfigureRates")?"class=\"menu-active\"":"")%>>Configure Rates</span></a>
                         </li>
@@ -109,8 +140,16 @@
                             <a style="cursor:pointer;" onclick="redirect('ManageClaims','Insurer')" class="nav-link <%=(active.equals("ManageClaims")?"menu-active":"")%>"><i
                                     class="flaticon-bus-side-view"></i><span <%=(active.equals("ManageClaims")?"class=\"menu-active\"":"")%>>Claim Requests</span></a>
                         </li>
-
-                       
+                        <%if (master==1){ %>
+                         <li class="nav-item">
+                            <a style="cursor:pointer;" onclick="redirect('AutoPriceUpdate','Insurer')" class="nav-link <%=(active.equals("AutoPriceUpdate")?"menu-active":"")%>"><i
+                                    class="flaticon-bus-side-view"></i><span <%=(active.equals("AutoPriceUpdate")?"class=\"menu-active\"":"")%>>Auto Price Update</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="cursor:pointer;" onclick="redirect('CreateInsurerAccount','Insurer')" class="nav-link <%=(active.equals("CreateInsurerAccount")?"menu-active":"")%>"><i
+                                    class="flaticon-bus-side-view"></i><span <%=(active.equals("CreateInsurerAccount")?"class=\"menu-active\"":"")%>>Create Insurer Account</span></a>
+                        </li>
+                       <%} %>
                     </ul>
                 </div>
             </div>
