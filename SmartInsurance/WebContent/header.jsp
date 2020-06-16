@@ -117,20 +117,20 @@ if (JSessionID!=null){
 							<li><a href="faq-page.html">Faq Page</a></li>
 							<li><a href="404-page.html">404 Page</a></li>
 						</ul></li>
-					<li class="dropdown"><a href="#">Client
+					<li class="dropdown"><a style="cursor:pointer;">Client
 							Portal</a>
 						<ul class="submenu">
 						<% if (login.equals("Client")){%>
-							<li><a href="#" onclick="redirect('clientProfile','Client')">User Info</a></li>
-							<li><a href="#" onclick="redirect('insuredItems','Client')">Insured Items</a></li>
-							<li><a href="#" onclick="redirect('Payments','Client')">Payments</a></li>
-							<li><a href="#" onclick="redirect('MakeClaim','Client')">Claim Request</a></li>
+							<li><a style="cursor:pointer;" onclick="redirect('clientProfile','Client')">User Info</a></li>
+							<li><a style="cursor:pointer;" onclick="redirect('insuredItems','Client')">Insured Items</a></li>
+							<li><a style="cursor:pointer;" onclick="redirect('Payments','Client')">Payments</a></li>
+							<li><a style="cursor:pointer;" onclick="redirect('MakeClaim','Client')">Claim Request</a></li>
 							<%}
 						else{%>
 						<li><a href="ClientLogin.jsp">Login/Register</a></li>
 						<%} %>
 						</ul></li>
-					<li class="dropdown"><a href="#">Insurer Portal</a>
+					<li class="dropdown"><a style="cursor:pointer;">Insurer Portal</a>
 						<ul class="submenu">
 						<% if (login.equals("Insurer")){%>
 							<li><a href="#" onclick="redirect('InsurerDashboard','Insurer')">Portal</a></li>

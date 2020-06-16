@@ -122,11 +122,11 @@ c.close();
 							<h2>Login Now</h2>
 						</div>
 						<form action="InsurerLogin" method="post">
-							<div class="form_group">
 							<%if (login.equals("loggedIN")) {%>
 						<h3><a href="Logout">You already logged in, click here to logout</a></h3>
 						<%}
 						else{%>
+						<div class="form_group">
 								<label>Email</label>
 								<div class="input_group">
 									<input id="email" name="email" type="email" placeholder="email@contact.com" required>
@@ -155,7 +155,7 @@ c.close();
 							<%} %>
 							
 						</form>
-					</div>
+					
 					</div>
 					<!-- End of .login_form -->
 
