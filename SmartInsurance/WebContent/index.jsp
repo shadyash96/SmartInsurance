@@ -64,7 +64,9 @@
 	<div class="boxed_wrapper">
 
 
-		<jsp:include page="header.jsp" />
+			<jsp:include page="header.jsp">
+    				 <jsp:param name="active" value="index"/>
+    				</jsp:include>
 		<%
 Cookie[] Allcookies = null;
 Allcookies = request.getCookies();
@@ -127,7 +129,7 @@ if (JSessionID!=null){
 							data-x="right" data-hoffset="240" data-y="top" data-voffset="400"
 							data-whitespace="nowrap" data-transform_idle="o:1;"
 							data-transform_in="o:0" data-transform_out="o:0" data-start="500">
-							<a href="user-make-claim.html" class="thm-btn thm-tran-bg">Make
+							<a style="cursor:pointer;" onclick="redirect('MakeClaim','Client')" class="thm-btn thm-tran-bg">Make
 								a claim</a>
 						</div></li>
 					<li data-transition="slidingoverlayleft"><img
@@ -158,7 +160,7 @@ if (JSessionID!=null){
 							data-x="left" data-hoffset="190" data-y="top" data-voffset="475"
 							data-whitespace="nowrap" data-transform_idle="o:1;"
 							data-transform_in="o:0" data-transform_out="o:0" data-start="500">
-							<a href="insurance.html" class="thm-btn thm-tran-bg">Make a
+							<a style="cursor:pointer;" onclick="redirect('MakeClaim','Client')" class="thm-btn thm-tran-bg">Make a
 								claim</a>
 						</div></li>
 					<li data-transition="slidingoverlayleft"><img
@@ -194,7 +196,7 @@ if (JSessionID!=null){
 							data-x="center" data-hoffset="94" data-y="top" data-voffset="475"
 							data-whitespace="nowrap" data-transform_idle="o:1;"
 							data-transform_in="o:0" data-transform_out="o:0" data-start="500">
-							<a href="insurance.html" class="thm-btn thm-tran-bg">Make a
+							<a style="cursor:pointer;" onclick="redirect('MakeClaim','Client')" class="thm-btn thm-tran-bg">Make a
 								claim</a>
 						</div></li>
 				</ul>
@@ -340,12 +342,12 @@ if (JSessionID!=null){
 							<div class="default-form">
 								<form id="form" class="home-contact-form  select-form" action="InsuranceRequest" method="post" onsubmit="return validateForm();">
 									<div class="row clearfix">
-
+									<%if (nationalID.length()>3){ %>
 										<div class="form-group col-md-12 col-sm-12 col-xs-12">
 											<input type="text" name="national_id" value="<%=nationalID %>"
 												placeholder="National Id">
 										</div>
-
+										<%} %>
 										<div id="divCont"
 											class="form-group col-md-12 col-sm-12 col-xs-12">
 											<div class="g-input f1 mb-30">

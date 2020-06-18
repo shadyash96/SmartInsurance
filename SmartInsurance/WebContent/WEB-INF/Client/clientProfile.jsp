@@ -159,7 +159,7 @@
 </section>
 
 
-	<jsp:include page="Footer.jsp"/>
+	<jsp:include page="../../Footer.jsp"/>
 
 	<!--Scroll to top-->
 	<div class="scroll-to-top scroll-to-target" data-target=".main-header"><span class="icon flaticon-arrows"></span>

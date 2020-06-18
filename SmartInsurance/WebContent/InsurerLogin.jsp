@@ -188,7 +188,7 @@ c.close();
 									<div class="form_group">
 										<label>Password</label>
 										<div class="input_group">
-											<input id="password" name="password" type="password" pattern=".{5,}" required title="Password min length 5 characters." > <i class="fa fa-lock"
+											<input id="password" name="password" type="password" pattern="[^ ]{5,}" required title="Password min length 5 characters." > <i class="fa fa-lock"
 												aria-hidden="true"></i>
 										</div>
 										<!-- End of .input_group -->

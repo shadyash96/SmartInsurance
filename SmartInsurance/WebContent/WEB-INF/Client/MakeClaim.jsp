@@ -222,7 +222,7 @@
 
 
 	<!-- Footer top -->
-	<jsp:include page="Footer.jsp"/>
+	<jsp:include page="../../Footer.jsp"/>
 	<!-- footer-bottom -->
 
 	<!--Scroll to top-->

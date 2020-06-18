@@ -102,21 +102,18 @@ if (JSessionID!=null){
 
 </header>
 <!-- End header top -->
-
+<%String active=request.getParameter("active"); 
+if (active==null)
+active=" ";%>
 <!-- Start nav menu -->
 <section class="mainmenu-wrapper stricky">
 	<div class="container">
 		<nav class="mainmenu-holder pull-left">
 			<div class="nav-header">
 				<ul class="navigation">
-					<li class="active"><a href="index.jsp">Home</a></li>
-					<li class="dropdown"><a href="about.html">About</a>
-						<ul class="submenu">
-							<li><a href="about.html">About Us</a></li>
-							<li><a href="team.html">Our Team</a></li>
-							<li><a href="faq-page.html">Faq Page</a></li>
-							<li><a href="404-page.html">404 Page</a></li>
-						</ul></li>
+					<li class="<%=active.equalsIgnoreCase("index")?"active":""%>"><a href="index.jsp">Home</a></li>
+					<li class="<%=active.equalsIgnoreCase("about")?"active":""%>"><a href="about.jsp">About</a>
+						</li>
 					<li class="dropdown"><a style="cursor:pointer;">Client
 							Portal</a>
 						<ul class="submenu">
@@ -158,7 +155,7 @@ if (JSessionID!=null){
 								<li><a href="account.html">My Account</a></li>
 							</ul>
 						</li> -->
-					<li><a href="contact.html">Contact</a></li>
+					
 				</ul>
 			</div>
 			<div class="nav-footer hidden-lg">

@@ -6,26 +6,26 @@
 			<div class="row">
 				<div class="col-md-3 col-sm-6">
 					<div class="footer-widget about-widget">
-						<a href="index.jsp"><img src="images/logo/logo2.png" alt="" /></a>
-						<p>Renter is a global provider of Life insurance, annuities, employee benefits and assets management. Insurance has operations in nearly 50 countries serving approximately 100 million coustomers.</p>
+						<a href="index.jsp"><img src="images/logo/logo.png" alt="" /></a>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec eros justo. Duis ac diam nisi. Nunc varius tempus dapibus. Nulla maximus maximus massa non consequat. Aenean ac risus vel libero.</p>
 						<ul class="list-inline social">
 							<li>
-								<a href="#"><i class="fa fa-facebook"></i></a>
+								<a href=""><i class="fa fa-facebook"></i></a>
 							</li>
 							<!-- comment for inline hack
                     -->
 							<li>
-								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href=""><i class="fa fa-twitter"></i></a>
 							</li>
 							<!-- comment for inline hack
                     -->
 							<li>
-								<a href="#"><i class="fa fa-skype"></i></a>
+								<a href=""><i class="fa fa-skype"></i></a>
 							</li>
 							<!-- comment for inline hack
                     -->
 							<li>
-								<a href="#"><i class="fa fa-linkedin"></i></a>
+								<a href=""><i class="fa fa-linkedin"></i></a>
 							</li>
 						</ul>
 					</div>
@@ -50,7 +50,7 @@
 										</div>
 										<!-- /.icon-box -->
 										<div class="text-box">
-											<p>26 Chatham Hill,Kent ME5,<br>London, United Kingdom.</p>
+											<p>Company Address here</p>
 										</div>
 										<!-- /.text-box -->
 									</li>
@@ -60,7 +60,7 @@
 										</div>
 										<!-- /.icon-box -->
 										<div class="text-box">
-											<p>+ (12) 123 - 5567123 <br>info@insurance.com</p>
+											<p>+ (20) 0000000 <br>SmartInsurance@MSA.com</p>
 										</div>
 										<!-- /.text-box -->
 									</li>
@@ -70,7 +70,7 @@
 										</div>
 										<!-- /.icon-box -->
 										<div class="text-box">
-											<p>+(321) 58 759 89123</p>
+											<p>+(02) 0000000</p>
 										</div>
 										<!-- /.text-box -->
 									</li>
@@ -96,42 +96,9 @@
 					<!-- /.footer-widget link-widget -->
 				</div>
 				<!-- /.col-md-3 -->
-				<div class="col-md-3 col-sm-6">
-					<div class="footer-widget link-widget">
-						<div class="inner-title">
-							<h3><span class="white-color-text">Our Service</span></h3>
-							<span class="decor-line"></span>
-						</div>
-						<!-- /.sec-title-two -->
-						<ul class="links">
-							<li><a href="#">Auto Insurance</a></li>
-							<li><a href="#">Home Insurance</a></li>
-							<li><a href="#">Life Insurance</a></li>
-							<li><a href="#">Bike Insurance</a></li>
-							<li><a href="#">Boat Insurance</a></li>
-							<li><a href="#">Business Insurance</a></li>
-						</ul>
-						<!-- /.links -->
-					</div>
-					<!-- /.footer-widget link-widget -->
-				</div>
+				
 				<!-- /.col-md-3 -->
-				<div class="col-md-3 col-sm-6">
-					<div class="footer-widget subscribe-widget">
-						<div class="inner-title">
-							<h3>Subscribe us</h3>
-							<span class="decor-line"></span>
-						</div>
-						<!-- /.sec-title-two -->
-						<p class="highlight">Sign up today for tips and latest news and exclusive special offers.</p>
-						<form action="#" class="clearfix mailchimp-form">
-							<input type="text" name="email" placeholder="Email address" />
-							<button type="submit"><i class="fa fa-envelope-o"></i></button>
-						</form>
-						<p class="highlight">We dont’t do spam and Your mail id very confidential.</p>
-					</div>
-					<!-- /.footer-widget link-widget -->
-				</div>
+				
 				<!-- /.col-md-3 -->
 
 			</div>
@@ -143,21 +110,7 @@
 
 	<!-- Start footer bottom -->
 	<section class="footer-bottom">
-		<div class="container">
-			<div class="pull-left get-text">
-				<ul>
-					<li><a href="#">Cookies</a></li>
-					<li><a href="#">Policies</a></li>
-					<li><a href="#">Terms</a></li>
-					<li><a href="#">Blog</a></li>
-				</ul>
-			</div>
-			<!-- /.pull-right -->
-			<div class="pull-right copy-text">
-				<p>Copyright 2017 <a href="#">iGlyphic, All Right Reserved</a></p>
-			</div>
-			<!-- /.pull-left -->
-		</div>
+		
 		<!-- /.container -->
 	</section>
 	<!-- footer-bottom -->

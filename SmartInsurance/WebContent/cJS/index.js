@@ -336,8 +336,8 @@ function getPrice(){
         type:'POST',
         data: list,
         success: function(data){
-        	if (data.length>20){
-        		//alert(data);
+        	if (data.length>10){
+        		alert(data);
         		document.getElementById("ProductPrice").readOnly=false;
         		}
         	else	{

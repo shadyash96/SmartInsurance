@@ -71,7 +71,11 @@ public class Redirect extends HttpServlet {
 		if (rs.getString(1).equals("Exists"))
 			request.getRequestDispatcher("WEB-INF/"+Type+"/"+page+".jsp").forward(request, response);
 		else
-			response.sendRedirect("index.jsp");
+			if (Type.equalsIgnoreCase("Client")) {
+				response.sendRedirect("ClientLogin.jsp");}
+			else
+				response.sendRedirect("InsurerLogin.jsp");
+			
 		c.close();
 	} catch (ClassNotFoundException | SocketException | SQLException e) {
 		// TODO Auto-generated catch block

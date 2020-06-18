@@ -4,6 +4,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.Connection"%>
+<link rel="stylesheet" href="font3/flaticon.css">
 
 <%Connection c= DatabaseConnection.getConnection();
 Cookie[] Allcookies = null;
@@ -111,7 +112,7 @@ c.close(); %>
                             </li>
                             <li class="nav-item">
                             <a style="cursor:pointer;" onclick="redirect('ManageCategories','Insurer')" class="nav-link <%=(active.equals("ManageCategories")?"menu-active":"")%>"><i
-                                    class="flaticon-open-book"></i><span <%=(active.equals("ManageCategories")?"class=\"menu-active\"":"")%>>Manage Categories</span></a>
+                                    class="flaticon-car"></i><span <%=(active.equals("ManageCategories")?"class=\"menu-active\"":"")%>>Manage Categories</span></a>
                         </li>
                     
                         
@@ -121,10 +122,10 @@ c.close(); %>
                         </li>
                         <li class="nav-item">
                             <a style="cursor:pointer;" onclick="redirect('UserInfo','Insurer')"  class="nav-link <%=(active.equals("UserInfo")?"menu-active":"")%>"><i
-                                    class="flaticon-open-book"></i><span <%=(active.equals("UserInfo")?"class=\"menu-active\"":"")%>>User Info</span></a>
+                                    class="flaticon-multiple-users-silhouette"></i><span <%=(active.equals("UserInfo")?"class=\"menu-active\"":"")%>>User Info</span></a>
                         </li>
                         <li class="nav-item">
-                            <a style="cursor:pointer;" onclick="redirect('ConfigureRates','Insurer')" class="nav-link <%=(active.equals("ConfigureRates")?"menu-active":"")%>"><i class="flaticon-calendar"></i>
+                            <a style="cursor:pointer;" onclick="redirect('ConfigureRates','Insurer')" class="nav-link <%=(active.equals("ConfigureRates")?"menu-active":"")%>"><i class="flaticon-interest-rate"></i>
                             <span <%=(active.equals("ConfigureRates")?"class=\"menu-active\"":"")%>>Configure Rates</span></a>
                         </li>
                         <li class="nav-item">
@@ -134,16 +135,16 @@ c.close(); %>
                         <li class="nav-item">
                         
                             <a style="cursor:pointer;" onclick="redirect('InsuranceRequests','Insurer')" class="nav-link <%=(active.equals("InsuranceRequests")?"menu-active":"")%>"><i
-                                    class="flaticon-checklist"></i><span <%=(active.equals("InsuranceRequests")?"class=\"menu-active\"":"")%>>Insurance Requests</span></a>
+                                    class="flaticon-request"></i><span <%=(active.equals("InsuranceRequests")?"class=\"menu-active\"":"")%>>Insurance Requests</span></a>
                         </li>
                         <li class="nav-item">
                             <a style="cursor:pointer;" onclick="redirect('ManageClaims','Insurer')" class="nav-link <%=(active.equals("ManageClaims")?"menu-active":"")%>"><i
-                                    class="flaticon-bus-side-view"></i><span <%=(active.equals("ManageClaims")?"class=\"menu-active\"":"")%>>Claim Requests</span></a>
+                                    class="flaticon-notification"></i><span <%=(active.equals("ManageClaims")?"class=\"menu-active\"":"")%>>Claim Requests</span></a>
                         </li>
                         <%if (master==1){ %>
                          <li class="nav-item">
                             <a style="cursor:pointer;" onclick="redirect('AutoPriceUpdate','Insurer')" class="nav-link <%=(active.equals("AutoPriceUpdate")?"menu-active":"")%>"><i
-                                    class="flaticon-bus-side-view"></i><span <%=(active.equals("AutoPriceUpdate")?"class=\"menu-active\"":"")%>>Auto Price Update</span></a>
+                                    class="flaticon-financial"></i><span <%=(active.equals("AutoPriceUpdate")?"class=\"menu-active\"":"")%>>Auto Price Update</span></a>
                         </li>
                         <li class="nav-item">
                             <a style="cursor:pointer;" onclick="redirect('CreateInsurerAccount','Insurer')" class="nav-link <%=(active.equals("CreateInsurerAccount")?"menu-active":"")%>"><i
