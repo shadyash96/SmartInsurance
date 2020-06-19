@@ -264,6 +264,8 @@ function ConditionChange(){
         		inputField[i].id="UsedField"+(i+1);
         		inputField[i].setAttribute("name", AllFields[i].split(":")[0]);
         		inputField[i].setAttribute("type", AllFields[i].split(":")[1]=="int"?"number":"text");
+        		if (AllFields[i].split(":")[1]=="int")
+        		inputField[i].setAttribute("min","0");
         		inputField[i].setAttribute("placeholder","Enter "+AllFields[i].split(":")[0]);
         		myParent.appendChild(divContainer[i]);
         		divContainer[i].appendChild(inputField[i]);
@@ -374,33 +376,34 @@ function CalculatePremium(){
 		return false;
 	}
 	CalculateInitialPremium();
+	setTimeout(function(){
+		var Category=document.getElementById("Categories");
+		var SelectedCategory=Category.options[Category.selectedIndex].text;
+		var Price=document.getElementById("ProductPrice").value;
+		var CoveragePercentage=document.getElementById("CoveragePercentage").value;
+		var InsuranceDuration=document.getElementById("InsuranceDuration").value;
+		var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
+		var InstallmentDownpayment=document.getElementById("InstallmentDownpayment").value;
+		var InstallmentDuration=document.getElementById("InstallmentDuration").value;
+		if (PaymentType=="installment" && (parseInt(InstallmentDownpayment)< parseInt(document.getElementById("InstallmentDownpayment").min) || InstallmentDownpayment<1)){
+			alert("Downpayment minimum should be "+document.getElementById("InstallmentDownpayment").min);
+			return;
+		}
+		$.ajax({
+	        url:'GetPremium',
+	        type:'POST',
+	        data: {SelectedCategory, Price, CoveragePercentage, InsuranceDuration, PaymentType, InstallmentDownpayment, InstallmentDuration},
+	        success: function(data){
+	        	//alert(data);
+	        	if (PaymentType=="cash")
+	        		document.getElementById("PremiumValue").value=data+" EGP";
+	        	else
+	            	document.getElementById("PremiumValue").value=data+" EGP / Month"
+	        }
+	});
+	},1500);
 	// alert("Da5l hena");
-	var Category=document.getElementById("Categories");
-	var SelectedCategory=Category.options[Category.selectedIndex].text;
-	var Price=document.getElementById("ProductPrice").value;
-	var CoveragePercentage=document.getElementById("CoveragePercentage").value;
-	var InsuranceDuration=document.getElementById("InsuranceDuration").value;
-	var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
-	var InstallmentDownpayment=document.getElementById("InstallmentDownpayment").value;
-	var InstallmentDuration=document.getElementById("InstallmentDuration").value;
-	if (PaymentType=="installment" && InstallmentDownpayment<document.getElementById("InstallmentDownpayment").min){
-		alert("Downpayment minimum should be "+document.getElementById("InstallmentDownpayment").min);
-		return;
-	}
-	$.ajax({
-        url:'GetPremium',
-        type:'POST',
-        data: {SelectedCategory, Price, CoveragePercentage, InsuranceDuration, PaymentType, InstallmentDownpayment, InstallmentDuration},
-        success: function(data){
-        	//alert(data);
-        	if (!validateForm())
-        		return;
-        	if (PaymentType=="cash")
-        		document.getElementById("PremiumValue").value=data+" EGP";
-        	else
-            	document.getElementById("PremiumValue").value=data+" EGP / Month"
-        }
-});
+	
 }
 function CalculateInitialPremium(){
 	var Category=document.getElementById("Categories");
@@ -421,7 +424,7 @@ function CalculateInitialPremium(){
         		document.getElementById("InitialPremium").value=data+" EGP";
         	else
             	document.getElementById("InitialPremium").value=data+" EGP / Month"
-            document.getElementById("InstallmentDownpayment").min=data*(document.getElementById("DownpaymentPerc").value/100);
+            document.getElementById("InstallmentDownpayment").min=Math.ceil(data*(document.getElementById("DownpaymentPerc").value/100));
         }
 });
 }
@@ -440,8 +443,8 @@ function validateForm(){
 		return false;
 	}
 	var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
-	var InstallmentDownpayment=document.getElementById("InstallmentDownpayment").value;
-	if (PaymentType=="installment" && InstallmentDownpayment<document.getElementById("InstallmentDownpayment").min){
+	var InstallmentDownpayment=document.getElementById("InstallmentDownpayment");
+	if (PaymentType=="installment" && InstallmentDownpayment.value<InstallmentDownpayment.min){
 		alert("Downpayment minimum should be "+document.getElementById("InstallmentDownpayment").min);
 		return false;
 	}

@@ -115,7 +115,7 @@ public class GetPrice extends HttpServlet {
 					c.close();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					out.write("Cant use AI due to limitations in dataset. Enter the price manually");
+					out.write("Cant use AI on this product due to limitations in dataset. Enter the price manually");
 					//e.printStackTrace();
 				}
 			}
