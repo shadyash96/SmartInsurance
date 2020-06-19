@@ -393,7 +393,8 @@ function CalculatePremium(){
         data: {SelectedCategory, Price, CoveragePercentage, InsuranceDuration, PaymentType, InstallmentDownpayment, InstallmentDuration},
         success: function(data){
         	//alert(data);
-        	validateForm();
+        	if (!validateForm())
+        		return;
         	if (PaymentType=="cash")
         		document.getElementById("PremiumValue").value=data+" EGP";
         	else
