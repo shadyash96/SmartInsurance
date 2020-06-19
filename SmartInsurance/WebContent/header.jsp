@@ -56,7 +56,7 @@ if (JSessionID!=null){
 					else {%>
 					<!-- <li><a href="clientLogin-Register.jsp">Login/Register</a></li> -->
 					<%} %>
-					<li><a href="#">Contact Us</a></li>
+				<!-- 	<li><a href="#">Contact Us</a></li>  -->
 				</ul>
 			</div>
 		</div>
