@@ -395,7 +395,7 @@ function CalculatePremium(){
         	else
             	document.getElementById("InitialPremium").value=data+" EGP / Month"
             document.getElementById("InstallmentDownpayment").min=Math.ceil(data*(document.getElementById("DownpaymentPerc").value/100));
-        
+      
         	var Category=document.getElementById("Categories");
         	var SelectedCategory=Category.options[Category.selectedIndex].text;
         	var Price=document.getElementById("ProductPrice").value;
