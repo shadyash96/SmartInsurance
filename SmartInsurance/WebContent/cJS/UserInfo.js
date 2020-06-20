@@ -2,6 +2,11 @@ function getClientInfo(){
 	$("#ClientInfoSubmit").attr("disabled", true);
 	var fetch="getClientInfo";
 	var PhoneNo=document.getElementById("PhoneNo").value;
+	if (PhoneNo.length!=11){
+		alert("Phone number should be 11 digits");
+		$("#ClientInfoSubmit").attr("disabled", false);
+		return;
+	}
 	$.ajax({
         url:'ManagePayments',
         type:'POST',
@@ -9,6 +14,7 @@ function getClientInfo(){
         success: function(data){
         	if (data=="Phone Number Doesn't Exist"){
         		alert(data);
+        		$("#ClientInfoSubmit").attr("disabled", false);
         		return;
         	}
         	// Split "/"
@@ -22,7 +28,7 @@ function getClientInfo(){
             form.method="post";
             form.submit();
             $(form).remove();
-        	        	
+            $("#ClientInfoSubmit").attr("disabled", false);      	
         }
 });
 }

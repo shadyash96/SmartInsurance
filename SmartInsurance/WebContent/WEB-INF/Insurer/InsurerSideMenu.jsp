@@ -60,11 +60,11 @@ c.close(); %>
                     <li class="navbar-item header-search-bar">
                         <div class="input-group stylish-input-group">
                             <span class="input-group-addon">
-                                <button type="submit">
+                               <!--  <button type="submit">
                                     <span class="flaticon-search" aria-hidden="true"></span>
-                                </button>
+                                </button> -->
                             </span>
-                            <input type="text" class="form-control" placeholder="Find Something . . .">
+                           <!-- <input type="text" class="form-control" placeholder="Find Something . . ."> --> 
                         </div>
                     </li>
                 </ul>
@@ -74,7 +74,7 @@ c.close(); %>
                             aria-expanded="false">
                             <div class="admin-title">
                                 <h5 class="item-title"><%=email %></h5>
-                                <span>Admin</span>
+                                <span><%=master==1?"Master ":""%>Admin</span>
                             </div>
                             <div class="admin-img">
                                 <img src="insurerCSS/img2/figure/admin.jpg" alt="Admin">
