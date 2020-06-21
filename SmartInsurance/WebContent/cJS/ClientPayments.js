@@ -1,5 +1,7 @@
+window.onload=function(){ getClientInfo();}
+
 function getClientInfo(){
-	$("#ClientInfoSubmit").attr("disabled", true);
+	//$("#ClientInfoSubmit").attr("disabled", true);
 	var fetch="getClientInfo";
 	var PhoneNo=document.getElementById("PhoneNo").value;
 	$.ajax({
@@ -9,16 +11,32 @@ function getClientInfo(){
         success: function(data){
         	if (data=="Phone Number Doesn't Exist"){
         		alert(data);
-        		$("#ClientInfoSubmit").attr("disabled", false);
         		return;
         	}
         	// Split "/"
         	var INFO=data.split("//")[0].split(",");
         	//[0] split "," INFO 0_ClientID, 1_Name, 2_National ID
-        	document.getElementById("ClientName").value=INFO[1];
-        	document.getElementById("ClientNational").value=INFO[2];
+        	//document.getElementById("ClientName").value=INFO[1];
+        	//document.getElementById("ClientNational").value=INFO[2];
         	var ALLInsuranceRequests=data.split("//")[1].split(":");
-        	$("#RequestsTable tr").remove(); 
+        	$("#RequestsTable tr").remove();
+        	if (ALLInsuranceRequests[0].length<1){
+        		$("#ApprovedRequestFirst tr").remove();
+        		$("#ApprovedRequestFirst h5").remove();
+        		$("#ApprovedRequestFirst").append("<h5>There are no approved requests</h5>");
+        		}
+        	else{
+        		$("#ApprovedRequestFirst tr").remove();
+        		$("#ApprovedRequestFirst").append("<tr>"+
+                 "<th>Request ID</th>"+
+                 "<th>Item details </th>"+
+                 "<th>Condition</th>"+
+                 "<th>Premium Value</th>"+
+                 "<th>Payment type</th>"+
+                 "<th>Need to be Paid</th>"+
+                 "<th></th>"+
+                "</tr>");
+        	}
         	for (var i=0;i<ALLInsuranceRequests.length;i++){
         		var InsuranceRequest=ALLInsuranceRequests[i].split(",");
         		if (InsuranceRequest.length<2)
@@ -35,7 +53,8 @@ function getClientInfo(){
         		"<td>"+InsuranceRequest[8]+"</td>"+
         		"<td>"+InsuranceRequest[11]+"</td>"+
         		"<td>"+InsuranceRequest[5]+"</td>"+
-        		"<td>"+ToBePaid+"</td></tr>";
+        		"<td>"+ToBePaid+"</td>"+
+        		"<td><button class=\"button button-icon\" onclick=\"MakeInitialPayment('"+InsuranceRequest[10]+"','"+ToBePaid+"')\">Activate Insurance</button></td></tr>";
         		$("#RequestsTable").append(temp);
         		//[1] InsuranceRequests  Split ":" //0_Category, 1_Details, 2_ItemValue, 3_Coverage, 4_Duration, 5_Payment Method, 
     			//6_Installment Duration, 7_Downpayment, 8_Condition, 9_Status, 10_Request_ID, 11_Premium Value, 12_Client_ID
@@ -43,7 +62,21 @@ function getClientInfo(){
         	///////////Installments table
         	var ALLInstallments=data.split("//")[2].split(":");
         	$("#InstallmentsTable tr").remove(); 
-        	
+        	if (ALLInstallments[0].length<1){
+        		$("#InstallmentFirst tr").remove();
+        		$("#InstallmentFirst h5").remove();
+        		$("#InstallmentFirst").append("<h5>There are no pending installments.</h5>");
+        		}
+        	else{
+        		$("#InstallmentFirst tr").remove();
+        		$("#InstallmentFirst").append("<tr>"+
+                                                "<th>Installment ID </th>"+
+                                                "<th>Item</th>"+
+                                                "<th>Inst. date</th>"+
+                                                "<th>Value</th>"+
+                                                "<th></th>"+
+                                            "</tr>");
+        	}
         	for (var i=0;i<ALLInstallments.length;i++){
         		var Installment=ALLInstallments[i].split(",");
         		if (Installment[0].length<1)
@@ -51,11 +84,12 @@ function getClientInfo(){
         		var temp="<tr><td>"+Installment[0]+"</td>"+
         		"<td>"+Installment[5]+" > "+Installment[6]+"</td>"+
         		"<td>"+Installment[3]+"</td>"+
-        		"<td>"+Installment[4]+" EGP </td></tr>";
+        		"<td>"+Installment[4]+" EGP </td>"+
+        		"<td><button class=\"button button-icon\" onclick=\"MakeInstallmentPayment('"+Installment[0]+"','"+Installment[4]+"')\">Pay Installment</button></td></tr>";
         		$("#InstallmentsTable").append(temp);
         		//[2] Installments split ":" //0_Installment_ID, 1_Status, 2_InsuranceID, 3_Payment Date, 4_Payment Value, ,5_Category, 6_Item Details
         		}
-        	$("#ClientInfoSubmit").attr("disabled", false);
+    //    	$("#ClientInfoSubmit").attr("disabled", false);
         	
 		
         	        	
@@ -100,29 +134,36 @@ $('#InstallmentID').on('change', function(){
 	});
 	});
 
-function MakeInitialPayment(){
-	$("#InitialSubmit").attr("disabled", true);
+function MakeInitialPayment(RequestID, ToBePaid){
+	//$("#InitialSubmit").attr("disabled", true);
+	var completePayment=confirm("You're going to pay "+ToBePaid+" EGP to activate your insurance.");
+	if (completePayment != true) {
+		  return;
+		}
 	var fetch="InitialPayment";
-	var RequestID=document.getElementById("RequestID").value;
+	//var RequestID=document.getElementById("RequestID").value;
 	$.ajax({
         url:'MakePayments',
         type:'POST',
         data: {fetch, RequestID},
         success: function(data){
-        	//getClientInfo();
+        	getClientInfo();
         	document.getElementById("Message").innerHTML=data;
         	setTimeout(function(){
           		document.getElementById("Message").innerHTML="";
           	}, 5000);
-        	$("#InitialSubmit").attr("disabled", false);
+        	//$("#InitialSubmit").attr("disabled", false);
         }
 });
 }
 
-function MakeInstallmentPayment(){
-	$("#InstallmentSubmit").attr("disabled", true);
+function MakeInstallmentPayment(InstallmentID, ToBePaid){
+	var completePayment=confirm("You're going to pay "+ToBePaid+" EGP installment.");
+	if (completePayment != true) {
+		  return;
+		}
 	var fetch="InstallmentPayment";
-	var InstallmentID=document.getElementById("InstallmentID").value;
+	//var InstallmentID=document.getElementById("InstallmentID").value;
 	$.ajax({
         url:'MakePayments',
         type:'POST',

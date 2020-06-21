@@ -85,14 +85,14 @@ public class MakePayments extends HttpServlet {
 					ResultSet rss=pss.executeQuery();
 					rss.next();
 					int newID=rss.getInt(1);
-					if (PaymentType.equals("Cash")) {
+					if (PaymentType.equalsIgnoreCase("Cash")) {
 						pss=c.prepareStatement("insert into Transactions (Insurance_ID, Type, Payment) values (?,?,?)");
 						pss.setInt(1, newID);
 						pss.setString(2, "Cash");
 						pss.setInt(3, PremiumValue);
 						pss.execute();
 					}
-					else if (PaymentType.equals("Installment")) {
+					else if (PaymentType.equalsIgnoreCase("Installment")) {
 						PreparedStatement pss2=c.prepareStatement("insert into Transactions (Insurance_ID, Type, Payment) values (?,?,?)");
 						pss2.setInt(1, newID);
 						pss2.setString(2, "Downpayment");

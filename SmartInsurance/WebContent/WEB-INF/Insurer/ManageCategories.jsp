@@ -272,11 +272,11 @@ $( document ).ready(function(){
                         <input name="MaximumInsurMonths" required type="number" placeholder="#" class="form-control">
                     </div>
                     <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                        <label>Min coverage</label>
+                        <label>Min coverage percentage</label>
                         <input name="MinCoverage" required type="number" placeholder="#" class="form-control">
                     </div>
                     <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                        <label>Max coverage*</label>
+                        <label>Max coverage percentage</label>
                         <input name="MaxCoverage" required type="number" placeholder="#" class="form-control">
                     </div>
                     <div class="col-6-xxxl col-lg-6 col-6 form-group">
@@ -327,11 +327,11 @@ $( document ).ready(function(){
                                           <input name="MaximumInsurMonths" id="MaximumInsurMonths" type="number" placeholder="#" class="form-control">
                                       </div>
                                       <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                          <label>Min coverage</label>
+                                          <label>Min coverage percentage</label>
                                           <input name="MinCoverage" id="MinCoverage" type="number" placeholder="%" class="form-control">
                                       </div>
                                       <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                          <label>Max coverage*</label>
+                                          <label>Max coverage percentage</label>
                                           <input name="MaxCoverage" id="MaxCoverage" type="number" placeholder="#" class="form-control">
                                       </div>
                                       <div class="col-6-xxxl col-lg-6 col-6 form-group">
@@ -339,7 +339,7 @@ $( document ).ready(function(){
                                           <input name="MinInstMonths" id="MinInstMonths" type="number" placeholder="#" class="form-control">
                                       </div>
                                       <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                          <label>Max installment</label>
+                                          <label>Max installment months</label>
                                           <input name="MaxInstMonths" id="MaxInstMonths" type="number" placeholder="Enter 0 to Disable" class="form-control">
                                       </div>
                                       <div class="col-6-xxxl col-lg-6 col-6 form-group">

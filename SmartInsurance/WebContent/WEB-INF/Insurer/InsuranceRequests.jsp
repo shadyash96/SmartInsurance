@@ -143,7 +143,7 @@ ArrayList<String[]> Requests=GetInfo.getInsuranceRequests();
                                                 <td style="vertical-align: middle;"><%=Requests.get(i)[3] %>%</td>
                                                 <td style="vertical-align: middle;"><%=Requests.get(i)[4] %> Months</td>
                                                 <td style="vertical-align: middle;"><%=Requests.get(i)[5]%>
-                                                <%=(Requests.get(i)[5].equals("Installment")?"<br>Duration: "+Requests.get(i)[6]+" Months<br>Downpayment: "+Requests.get(i)[7]:"") %></td>
+                                                <%=(Requests.get(i)[5].equalsIgnoreCase("Installment")?"<br>Duration: "+Requests.get(i)[6]+" Months<br>Downpayment: "+Requests.get(i)[7]:"") %></td>
                                                 <td style="vertical-align: middle;"><%=Requests.get(i)[11] %> EGP</td>
                                                 
                                             </tr>

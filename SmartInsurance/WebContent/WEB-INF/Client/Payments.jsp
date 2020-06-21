@@ -47,16 +47,19 @@
   <div class="boxed_wrapper">
 
     <jsp:include page="../../header.jsp" />
+    
     <%
     //0_Name, 1_Email, 2_Address, 3_Phone_No, 4_Identification_no
     Cookie[] cookies = request.getCookies();
     String SessionID=GetClientInfo.getSessionID(request.getCookies());
     String info[];
     info=GetClientInfo.getBasics(SessionID);
+    
   //0_Category, 1_Details, 2_ItemValue, 3_Coverage, 4_Duration, 5_Payment Method, 
   		//6_Installment Duration, 7_Downpayment, 8_Condition, 9_Status, 10_Request_ID
-    ArrayList<String[]> UpcomingPayments=GetClientInfo.getUpcomingPayments(SessionID);
+    //ArrayList<String[]> UpcomingPayments=GetClientInfo.getUpcomingPayments(SessionID);
     %>
+    <input id="PhoneNo" required type="hidden" placeholder="" value="<%=info[3]%>" class="form-control">
     <section class="subheader">
       <div class="container">
         <h1>Payments</h1>
@@ -84,36 +87,33 @@
     		</div>
 
     		<div class="col-lg-9 col-md-9">
-    		<h3>Upcoming Payments</h3><br>
-    		<%if (UpcomingPayments.size()<1)
-    			out.print("There are no Upcoming Payments <br>");
-    		else{%>
+    		<h3>Approved Requests</h3><br>
     			<table class="my-properties-list">
-    			  <tr>
-    				<th>Item</th>
-    				<th>Payment Date</th>
-    				<th>Payment Value</th>
-    			  </tr>
-    			  <%//0_Category, 1_Details, 2_Payment_Date, 3_PaymentValue	 %>	
-		<%for (int i=0;i<UpcomingPayments.size();i++){ %>
-    			  <tr>			
-    				<td class="property-title">
-    					<a><%=UpcomingPayments.get(i)[1] %></a><br/>
-    					<p class="category"><i class="fa fa-arrow-right icon"></i><%=UpcomingPayments.get(i)[0] %></p>
-    				</td>
-    				<td class="property-date"><%=UpcomingPayments.get(i)[2]%></td>	
-    				<td class="property-date" ><%=UpcomingPayments.get(i)[3]%></td>
-    				
-    				
-    			  </tr>
-    			  <%}%>	  
+    			  <thead id="ApprovedRequestFirst">
+                     
+                   </thead>
+    			      <tbody id="RequestsTable">
+                                        </tbody>      
+    			</table>
+    			<br>
+    		</div>
+    		<br>
+    		<div class="col-lg-9 col-md-9">
+    		<h3>Installments</h3><br>
+    			<table class="my-properties-list">
+    			  <thead id="InstallmentFirst">
+                                            
+                                        </thead>
+                                        <tbody id="InstallmentsTable">
+                                           
 
-           
 
-    			</table><%} %>
+                                        </tbody>  
+    			</table>
 
     			
-    		</div><!-- end col -->
+    		</div>
+    		<!-- end col -->
     	</div><!-- end row -->
 
       </div><!-- end container -->
@@ -176,6 +176,7 @@
 <!-- theme custom js  -->
 <script id="map-script" src="js/default-map.js"></script>
 <script src="js/custom.js"></script>
+<script src="cJS/ClientPayments.js"></script>
 
 
 

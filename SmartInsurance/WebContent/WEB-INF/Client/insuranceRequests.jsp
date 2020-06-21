@@ -105,7 +105,7 @@
     				<td class="property-date"><%out.print("Coverage: "+Requests.get(i)[3]+"%<br>Duration: "+Requests.get(i)[4]+" Months");%></td>
     				<td class="block"><p><strong>
     				<%out.print("Method: "+Requests.get(i)[5]+"<br>");
-    				if (Requests.get(i)[5].equals("Cash"))
+    				if (Requests.get(i)[5].equalsIgnoreCase("Cash"))
     					out.print(Requests.get(i)[11]+" EGP");
     					else{
     						out.print("Downpayment: "+Requests.get(i)[7]+" EGP<br>");
@@ -120,8 +120,8 @@
            
 
     			</table>
-
-    			
+    			<br>
+    			<h5>Approved requests can be activated through the Payments page.</h5>    			
     		</div><!-- end col -->
     	</div><!-- end row -->
 
