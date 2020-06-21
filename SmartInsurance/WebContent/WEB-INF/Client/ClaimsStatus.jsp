@@ -47,23 +47,19 @@
   <div class="boxed_wrapper">
 
     <jsp:include page="../../header.jsp" />
-    
     <%
     //0_Name, 1_Email, 2_Address, 3_Phone_No, 4_Identification_no
     Cookie[] cookies = request.getCookies();
     String SessionID=GetClientInfo.getSessionID(request.getCookies());
     String info[];
     info=GetClientInfo.getBasics(SessionID);
-    
-  //0_Category, 1_Details, 2_ItemValue, 3_Coverage, 4_Duration, 5_Payment Method, 
-  		//6_Installment Duration, 7_Downpayment, 8_Condition, 9_Status, 10_Request_ID
-    //ArrayList<String[]> UpcomingPayments=GetClientInfo.getUpcomingPayments(SessionID);
+  ///0_Category, 1_Details, 2_Accident, 3_Claim Value, 4_Status, 5_Rejection Reason
+    ArrayList<String[]> Claims=GetClientInfo.getClaimStatus(SessionID);
     %>
-    <input id="PhoneNo" required type="hidden" placeholder="" value="<%=info[3]%>" class="form-control">
     <section class="subheader">
       <div class="container">
-        <h1>Payments</h1>
-        <div class="breadcrumb right">Home <i class="fa fa-angle-right"></i> <a href="#" class="current">Payments</a></div>
+        <h1>Insured Items</h1>
+        <div class="breadcrumb right">Home <i class="fa fa-angle-right"></i> <a href="#" class="current">Insured Items</a></div>
         <div class="clear"></div>
       </div>
     </section>
@@ -79,7 +75,7 @@
     					<p><i class="fa fa-envelope icon"></i><%=info[1]%></p>
     				</div>
     				<jsp:include page="clientSideMenu.jsp">
-    				 <jsp:param name="active" value="Payments"/>
+    				 <jsp:param name="active" value="ClaimsStatus"/>
     				</jsp:include>
     				
     				
@@ -87,40 +83,40 @@
     		</div>
 
     		<div class="col-lg-9 col-md-9">
-    		<h3>Approved Requests</h3><br>
-    			<table class="my-properties-list favorite-properties-list">
-    			  <thead id="ApprovedRequestFirst">
-                     
-                   </thead>
-    			      <tbody id="RequestsTable">
-                                        </tbody>      
+    			<table class="my-properties-list">
+    			  <tr>
+    				<th>Item</th>
+    				<th>Accident Description</th>
+    				<th>Claim Value</th>
+    				<th>Status</th>
+    				<th>Rejection Reason</th>
+    			  </tr>
+    			  <%//0_Category, 1_Details, 2_Accident, 3_Claim Value, 4_Status, 5_Rejection Reason %>	
+		<%for (int i=0;i<Claims.size();i++){ %>
+    			  <tr>			
+    				<td class=""><%=Claims.get(i)[0]+" > "+Claims.get(i)[1]%></td>
+    				<td><%=Claims.get(i)[2] %></td>	
+    				<td><%=Claims.get(i)[3] %></td>
+    				<td><%=Claims.get(i)[4] %></td>
+    				<td><%=Claims.get(i)[5]==null?"":Claims.get(i)[5] %></td>			
+    				
+    			  </tr>
+    			  <%}%>	  
+
+           
+
     			</table>
     			<br>
-    		</div>
-    		<br>
-    		<div class="col-lg-9 col-md-9">
-    		<h3>Installments</h3><br>
-    			<table class="my-properties-list">
-    			  <thead id="InstallmentFirst">
-                                            
-                                        </thead>
-                                        <tbody id="InstallmentsTable">
-                                           
-
-
-                                        </tbody>  
-    			</table>
-
     			
-    		</div>
-    		<!-- end col -->
+    		</div><!-- end col -->
     	</div><!-- end row -->
 
       </div><!-- end container -->
     </section>
 
 
-  <jsp:include page="../../Footer.jsp"/>
+  	<!-- Footer top -->
+  	<jsp:include page="../../Footer.jsp"/>
   	<!-- footer-bottom -->
 
   	<!--Scroll to top-->
@@ -176,7 +172,6 @@
 <!-- theme custom js  -->
 <script id="map-script" src="js/default-map.js"></script>
 <script src="js/custom.js"></script>
-<script src="cJS/ClientPayments.js?v=2"></script>
 
 
 

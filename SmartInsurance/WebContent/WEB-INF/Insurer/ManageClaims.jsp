@@ -73,19 +73,6 @@ ArrayList<String[]> Requests=GetInfo.getClaimRequests();
                                     <div class="item-title">
                                         <h3>Claim Requests</h3>
                                     </div>
-                                    <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                            aria-expanded="false">...</a>
-
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                        </div>
-                                    </div>
                                 </div>
                                 <form action="ManageClaims" method="post" class="new-added-form">
                                     <div class="container">
@@ -102,6 +89,10 @@ ArrayList<String[]> Requests=GetInfo.getClaimRequests();
                                       <div class="col-12-xxxl col-lg-12 col-12 form-group">
                                           <label>Request ID *</label>
                                           <input required name="RequestID" type="number" placeholder="#" class="form-control">
+                                      </div>
+                                      <div class="col-12-xxxl col-lg-12 col-12 form-group">
+                                          <label>Rejection Reason (Required Only If Request is Rejected)</label>
+                                          <input name="RejectionReason" type="text" placeholder="#" class="form-control">
                                       </div>
                                       <div class="col-12 form-group mg-t-8">
                                         <button type="submit" name="fetch" value="Approve" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Approve</button>

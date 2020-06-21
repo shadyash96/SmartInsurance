@@ -48,13 +48,13 @@ function getClientInfo(){
         			ToBePaid=InsuranceRequest[7];
         		if (InsuranceRequest[10].length<1)
         			continue;
-        		var temp="<tr><td>"+InsuranceRequest[10]+"</td>"+
-        		"<td>"+InsuranceRequest[0]+" > "+InsuranceRequest[1]+"</td>"+
-        		"<td>"+InsuranceRequest[8]+"</td>"+
-        		"<td>"+InsuranceRequest[11]+"</td>"+
-        		"<td>"+InsuranceRequest[5]+"</td>"+
-        		"<td>"+ToBePaid+"</td>"+
-        		"<td><button class=\"button button-icon\" onclick=\"MakeInitialPayment('"+InsuranceRequest[10]+"','"+ToBePaid+"')\">Activate Insurance</button></td></tr>";
+        		var temp="<tr><td class=\"category\" style=\"width:15%\">"+InsuranceRequest[10]+"</td>"+
+        		"<td class=\"category\" style=\"width:32%\">"+InsuranceRequest[0]+" > "+InsuranceRequest[1]+"</td>"+
+        		"<td class=\"category\" style=\"width:20%\">"+InsuranceRequest[8]+"</td>"+
+        		"<td class=\"category\" style=\"width:20%\">"+InsuranceRequest[11]+"</td>"+
+        		"<td class=\"category\" style=\"width:33%\">"+InsuranceRequest[5]+"</td>"+
+        		"<td class=\"category\" style=\"width:20%\">"+ToBePaid+"</td>"+
+        		"<td class=\"category\" style=\"width:10%;\"><button style=\"padding-left:15px; padding-right:15px;\" class=\"button button-icon\" onclick=\"MakeInitialPayment('"+InsuranceRequest[10]+"','"+ToBePaid+"')\">Activate Insurance</button></td></tr>";
         		$("#RequestsTable").append(temp);
         		//[1] InsuranceRequests  Split ":" //0_Category, 1_Details, 2_ItemValue, 3_Coverage, 4_Duration, 5_Payment Method, 
     			//6_Installment Duration, 7_Downpayment, 8_Condition, 9_Status, 10_Request_ID, 11_Premium Value, 12_Client_ID

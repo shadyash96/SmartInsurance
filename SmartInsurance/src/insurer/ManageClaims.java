@@ -62,12 +62,20 @@ public class ManageClaims extends HttpServlet {
 				ps.execute();	
 			}
 			else if (fetch.equals("Decline")) {
-				PreparedStatement ps=c.prepareStatement("update ClaimRequest set Status='Declined' where ID=?");
-				ps.setInt(1, RequestID);
+				String RejectionReason=request.getParameter("RejectionReason");
+				if (RejectionReason==null || RejectionReason.length()<5) {
+					c.close();
+					request.setAttribute("Message", "Please enter a reason for rejection.");
+					request.getRequestDispatcher("WEB-INF/Insurer/ManageClaims.jsp").forward(request, response);
+				}
+				PreparedStatement ps=c.prepareStatement("update ClaimRequest set Status='Declined', RejectionReason=? where ID=?");
+				ps.setString(1, RejectionReason);
+				ps.setInt(2, RequestID);
 				ps.execute();	
+				
 			}
-			request.getRequestDispatcher("WEB-INF/Insurer/ManageClaims.jsp").forward(request, response);
 			c.close();
+			request.getRequestDispatcher("WEB-INF/Insurer/ManageClaims.jsp").forward(request, response);
 		} catch (ClassNotFoundException | SocketException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

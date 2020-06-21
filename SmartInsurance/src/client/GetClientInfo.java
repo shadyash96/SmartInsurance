@@ -260,4 +260,51 @@ public class GetClientInfo {
 		return InsuredItems;
 		
 	}
+	
+	static public ArrayList<String[]> getClaimStatus(String SessionID) throws ClassNotFoundException, SocketException {
+
+		String Category;
+		int ItemID;
+		// String strDate= formatter.format(date);
+		ArrayList<String[]> Claims = new ArrayList<String[]>();
+		
+		try {
+			Connection c = DatabaseConnection.getConnection();
+			PreparedStatement ps=c.prepareStatement("select InsuredItems.Category, InsuredItems.Item_ID, ClaimRequest.Description, ClaimRequest.Claim_Value, ClaimRequest.Status, ClaimRequest.RejectionReason from ClaimRequest join InsuredItems on InsuredItems.Insurance_ID =ClaimRequest.Insurance_ID join Accounts on InsuredItems.Client_ID = Accounts.Client_ID where SessionID=?;");
+			ps.setString(1, SessionID);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String Details="";
+				String[] temp=new String[12];
+				Category=rs.getString(1);
+				ItemID=rs.getInt(2);
+				PreparedStatement pss=c.prepareStatement("Select (Select COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='products_"+Category+"'),* from products_"+Category+" where Item_ID=?;");
+				pss.setInt(1, ItemID);
+				ResultSet rss=pss.executeQuery();
+				if (rss.next()) {
+					for (int i=5;i<=rss.getInt(1)+1;i++) {
+						if (i==5)
+							Details+=rss.getString(i);
+						else
+							Details+=" "+rss.getString(i);
+					}
+				}
+				//1_Category, 2_Item_ID, 3_Accident desc, 4_Claim Value, 5_Status, 6_RejectionReason
+				temp[0]=rs.getString(1);
+				temp[1]=Details;
+				temp[2]=rs.getString(3);
+				temp[3]=String.valueOf(rs.getInt(4));
+				temp[4]=rs.getString(5);
+				temp[5]=rs.getString(6);
+				Claims.add(temp);
+			}
+			c.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
+		//0_Category, 1_Details, 2_Accident, 3_Claim Value, 4_Status, 5_Rejection Reason
+		return Claims;
+		
+	}
 }
