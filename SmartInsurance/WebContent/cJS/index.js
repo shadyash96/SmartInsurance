@@ -65,6 +65,7 @@ function CategoryChange(){// lma el category btt3'yr
         	// bn7ot asamy el subcategories fe array esm sub categories
         	var myParent = document.getElementById("divCont");
         	var selectList=[];
+        	var label=[];
         	var divContainer=[];
         	for (var i=0;i<subCategories.length;i++){
         		if (subCategories[i].length <=0)
@@ -73,6 +74,9 @@ function CategoryChange(){// lma el category btt3'yr
         		divContainer[i]=document.createElement("div");
         		divContainer[i].appendChild(document.createElement("br"));
         		divContainer[i].id="DivSub"+(i+1);
+        		label[i]=document.createElement("LABEL");
+        		label[i].appendChild(document.createTextNode(subCategories[i]));
+        		label[i].setAttribute("style","color: #fff;");
         		selectList[i]= document.createElement("select");
             	// Create and append select list
             	
@@ -86,6 +90,7 @@ function CategoryChange(){// lma el category btt3'yr
         		var funcName="SubChange("+(i+1)+");";
         		selectList[i].setAttribute("onchange", funcName);
             	// myParent.appendChild(selectList[i]);
+        		divContainer[i].appendChild(label[i]);
         		divContainer[i].appendChild(selectList[i]);
             	selectList[i].add(new Option("Pick "+subCategories[i]));
             	divContainer[i].appendChild(document.createElement("br"));
@@ -250,6 +255,7 @@ function ConditionChange(){
         	var myParent = document.getElementById("UsedCont");
         	var divContainer=[];
         	var inputField=[];
+        	var label=[];
         	for (var i=0;i<AllFields.length;i++){
         		// myParent.appendChild(document.createElement("br"));
         		if (AllFields[i].split(":")[0].length<=0)
@@ -260,6 +266,9 @@ function ConditionChange(){
         		divContainer[i].classList.add("col-md-6");
         		divContainer[i].classList.add("col-sm-6");
         		divContainer[i].classList.add("col-xs-12");
+        		label[i]=document.createElement("LABEL");
+        		label[i].appendChild(document.createTextNode(AllFields[i].split(":")[0]));
+        		label[i].setAttribute("style","color: #fff;");
         		inputField[i]=document.createElement("input");
         		inputField[i].id="UsedField"+(i+1);
         		inputField[i].setAttribute("name", AllFields[i].split(":")[0]);
@@ -268,6 +277,7 @@ function ConditionChange(){
         		inputField[i].setAttribute("min","0");
         		inputField[i].setAttribute("placeholder","Enter "+AllFields[i].split(":")[0]);
         		myParent.appendChild(divContainer[i]);
+        		divContainer[i].appendChild(label[i]);
         		divContainer[i].appendChild(inputField[i]);
         	}
         	if (document.getElementById("UsedPriceMode").value=="auto"){

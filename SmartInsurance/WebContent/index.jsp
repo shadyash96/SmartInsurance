@@ -37,7 +37,7 @@
 	================================================== -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
-<script src="cJS/index.js?v=5"></script>
+<script src="cJS/index.js?v=6"></script>
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
 <!--[if lt IE 9]>
@@ -344,13 +344,15 @@ if (JSessionID!=null){
 									<div class="row clearfix">
 									<%if (nationalID.length()>3){ %>
 										<div class="form-group col-md-12 col-sm-12 col-xs-12">
-											<input type="text" name="national_id" value="<%=nationalID %>"
+										<label style="color: #fff;">National ID</label>
+											<input type="text" readonly name="national_id" value="<%=nationalID %>"
 												placeholder="National Id">
 										</div>
 										<%} %>
 										<div id="divCont"
 											class="form-group col-md-12 col-sm-12 col-xs-12">
 											<div class="g-input f1 mb-30">
+											<label style="color: #fff;">Product categories</label>
 												<select id="Categories" name="Categories"
 													onchange="CategoryChange();"
 													class="text-capitalize selectpicker" data-style="g-select"
@@ -379,9 +381,10 @@ if (JSessionID!=null){
 										<div id="UsedCalculateButton"
 											class="form-group col-md-6 col-sm-6 col-xs-12"
 											style="display: none;">
-											<button class="thm-btn" type="button" onclick="getPrice();">Calculate Price</button>
+											<button class="thm-btn" style="height:77px;" type="button" onclick="getPrice();">Calculate Price</button>
 										</div>
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
+										<label style="color: #fff;">Product Price</label>
 											<input readonly type="number" id="ProductPrice" name="ProductPrice"
 												placeholder="Product Current Price"
 												onchange="PriceChange();" required>
@@ -389,11 +392,13 @@ if (JSessionID!=null){
 
 
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
+										<label style="color: #fff;">Coverage Percentage</label>
 											<input id="CoveragePercentage" name="CoveragePercentage" type="number"
 												placeholder="Coverage Percentage" value="" required>
 										</div>
 
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
+										<label style="color: #fff;">Insurance Duration</label>
 											<input id="InsuranceDuration" name="InsuranceDuration" type="number"
 												placeholder="Insurance Duration in Months" required>
 										</div>
@@ -417,10 +422,12 @@ if (JSessionID!=null){
 										</div>
 										<div id="InstallmentCont" style="display: none;">
 											<div class="form-group col-md-6 col-sm-6 col-xs-12">
+											<label style="color: #fff;">Installment Downpayment</label>
 												<input id="InstallmentDownpayment" name="InstallmentDownpayment" type="number"
 													placeholder="Installment Downpayment">
 											</div>
 											<div class="form-group col-md-6 col-sm-6 col-xs-12">
+											<label style="color: #fff;">Installment Duration</label>
 												<input id="InstallmentDuration" name="InstallmentDuration" type="number"
 													placeholder="Installment Duration in Months">
 											</div>
