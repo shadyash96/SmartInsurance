@@ -83,7 +83,7 @@
     		</div>
 
     		<div class="col-lg-9 col-md-9">
-    			<table class="my-properties-list">
+    			<table class="table table-borderless">
     			  <tr>
     				<th>Item</th>
     				<th>Accident Description</th>
@@ -94,11 +94,11 @@
     			  <%//0_Category, 1_Details, 2_Accident, 3_Claim Value, 4_Status, 5_Rejection Reason %>	
 		<%for (int i=0;i<Claims.size();i++){ %>
     			  <tr>			
-    				<td class=""><%=Claims.get(i)[0]+" > "+Claims.get(i)[1]%></td>
-    				<td><%=Claims.get(i)[2] %></td>	
-    				<td><%=Claims.get(i)[3] %></td>
-    				<td><%=Claims.get(i)[4] %></td>
-    				<td><%=Claims.get(i)[5]==null?"":Claims.get(i)[5] %></td>			
+    				<td class="category"><%=Claims.get(i)[0]+" > "+Claims.get(i)[1]%></td>
+    				<td class="category"><%=Claims.get(i)[2] %></td>	
+    				<td class="category"><%=Claims.get(i)[3] %></td>
+    				<td class="category"><%=Claims.get(i)[4] %></td>
+    				<td class="category"><%=Claims.get(i)[5]==null?"":Claims.get(i)[5] %></td>			
     				
     			  </tr>
     			  <%}%>	  

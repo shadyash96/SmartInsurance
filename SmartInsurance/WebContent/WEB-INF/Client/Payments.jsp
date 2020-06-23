@@ -88,7 +88,7 @@
 
     		<div class="col-lg-9 col-md-9">
     		<h3>Approved Requests</h3><br>
-    			<table class="my-properties-list favorite-properties-list">
+    			<table class="table table-borderless">
     			  <thead id="ApprovedRequestFirst">
                      
                    </thead>
@@ -100,7 +100,7 @@
     		<br>
     		<div class="col-lg-9 col-md-9">
     		<h3>Installments</h3><br>
-    			<table class="my-properties-list">
+    			<table class="table table-borderless">
     			  <thead id="InstallmentFirst">
                                             
                                         </thead>
