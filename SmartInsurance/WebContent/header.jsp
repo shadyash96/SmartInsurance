@@ -167,7 +167,7 @@ active=" ";%>
 			</div>
 		</nav>
 		<div class="get-appt pull-right">
-			<a href="#section1" class="appt-btn theme-btn">Calculate Premium!</a>
+			<a href="index.jsp#section1" class="appt-btn theme-btn">Calculate Premium!</a>
 		</div>
 		<!--<div class="search-box pull-right">
 				<form action="#" class="clearfix">
