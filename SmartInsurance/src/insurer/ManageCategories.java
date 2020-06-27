@@ -105,6 +105,7 @@ public class ManageCategories extends HttpServlet {
 					}
 					ps.executeBatch();
 				}
+				c.close();
 				request.setAttribute("Message", "Category Added Successfully");
 				request.getRequestDispatcher("WEB-INF/Insurer/ManageCategories.jsp").forward(request, response);
 			}
