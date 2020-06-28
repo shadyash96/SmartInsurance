@@ -110,6 +110,12 @@ public class ManageCategories extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/Insurer/ManageCategories.jsp").forward(request, response);
 			}
 			else if (fetch.contentEquals("EditCategory")) {
+				if (Category.equalsIgnoreCase("Select Category")) {
+					c.close();
+					request.setAttribute("Message", "No Category was selected");
+					request.getRequestDispatcher("WEB-INF/Insurer/ManageCategories.jsp").forward(request, response);
+					return;
+				}
 				float Rate=Float.parseFloat(request.getParameter("Rate"));
 				int MinInsurMonths=Integer.parseInt(request.getParameter("MinimumInsurMonths"));
 				int MaxInsurMonths=Integer.parseInt(request.getParameter("MaximumInsurMonths"));

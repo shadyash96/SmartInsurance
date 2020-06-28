@@ -380,11 +380,40 @@ function InstallmentChange(){
  
 
 // console.dir(list);.
+ function checkInputs(){
+	 if (document.getElementById("Categories").selectedIndex==0){
+			alert("Please Select a Category");
+			return false;
+		}
+	 var SubCount=0;
+		var SubelementExists = document.getElementById("Sub"+(SubCount+1));
+		while (SubelementExists!=null){
+			if (SubelementExists.selectedIndex==0){
+				alert("Please Select a "+SubelementExists.getAttribute("name"));
+				return false;
+			}
+			SubCount++;
+			SubelementExists = document.getElementById("Sub"+(SubCount+1));
+			}
+		
+		if (document.getElementById("CoveragePercentage").value<1){
+			alert("Please specify the Coverage Percentage");
+			return false;
+		}
+		if (document.getElementById("InsuranceDuration").value<1){
+			alert("Please specify the Insurance Duration");
+			return false;
+		}
+		var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
+		if (PaymentType=="installment" && document.getElementById("InstallmentDuration").value<1){
+			alert("Please specify the Installment Duration");
+			return false;
+		}
+ }
+ 
+ 
 function CalculatePremium(){
-	if (document.getElementById("Categories").selectedIndex==0){
-		alert("Please Select a Category");
-		return false;
-	}
+	checkInputs();
 	
 	var Category=document.getElementById("Categories");
 	var SelectedCategory=Category.options[Category.selectedIndex].text;
@@ -466,6 +495,37 @@ function CalculateInitialPremium(){
 
 function validateForm(){
 	//alert("true");
+	 if (document.getElementById("Categories").selectedIndex==0){
+			alert("Please Select a Category");
+			return false;
+		}
+	 var SubCount=0;
+		var SubelementExists = document.getElementById("Sub"+(SubCount+1));
+		while (SubelementExists!=null){
+			if (SubelementExists.selectedIndex==0){
+				alert("Please Select a "+SubelementExists.getAttribute("name"));
+				return false;
+			}
+			SubCount++;
+			SubelementExists = document.getElementById("Sub"+(SubCount+1));
+			}
+		
+		if (document.getElementById("CoveragePercentage").value<1){
+			alert("Please specify the Coverage Percentage");
+			return false;
+		}
+		if (document.getElementById("InsuranceDuration").value<1){
+			alert("Please specify the Insurance Duration");
+			return false;
+		}
+		var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
+		if (PaymentType=="installment" && document.getElementById("InstallmentDuration").value<1){
+			alert("Please specify the Installment Duration");
+			return false;
+		}
+	
+	
+	
 	if (document.getElementById("PremiumValue").value.length<1){
 		alert("Premium will be calculated, submit again to confirm");
 		CalculatePremium();

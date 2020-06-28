@@ -387,20 +387,20 @@ if (JSessionID!=null){
 										<label style="color: #fff;">Product Price</label>
 											<input readonly type="number" id="ProductPrice" name="ProductPrice"
 												placeholder="Product Current Price"
-												onchange="PriceChange();" required>
+												onchange="PriceChange();">
 										</div>
 
 
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
 										<label style="color: #fff;">Coverage Percentage</label>
 											<input id="CoveragePercentage" name="CoveragePercentage" type="number"
-												placeholder="Coverage Percentage" value="" required>
+												placeholder="Coverage Percentage" value="">
 										</div>
 
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
 										<label style="color: #fff;">Insurance Duration</label>
 											<input id="InsuranceDuration" name="InsuranceDuration" type="number"
-												placeholder="Insurance Duration in Months" required>
+												placeholder="Insurance Duration in Months">
 										</div>
 
 										<div class="form-group col-md-12 col-sm-12 col-xs-12">
@@ -444,7 +444,7 @@ if (JSessionID!=null){
 												onclick="CalculatePremium();">Calculate Premium</button>
 										</div>
 										<div class="form-group col-md-6 col-sm-6 col-xs-12">
-											<input id="PremiumValue" name="PremiumValue" type="text" required value="" placeholder="Premium Quotation" readonly>
+											<input id="PremiumValue" name="PremiumValue" type="text" value="" placeholder="Premium Quotation" readonly>
 										</div>
 										<%if (login.equals("Client")) {%>
 										<button type="submit" class="thm-btn sub">Submit Request</button>

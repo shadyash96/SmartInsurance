@@ -71,7 +71,7 @@
       <div class="row">
       <div class="col-lg-10 col-lg-offset-1">
 
-      <form class="multi-page-form" action="clientMakeClaim" method="post">
+      <form class="multi-page-form" action="clientMakeClaim" onsubmit="return validateForm();" method="post">
 
         <div class="center">
           <div class="form-nav">
@@ -135,7 +135,7 @@
 <br>
               <div class="form-block">
                 <label>Incident Description *</label>
-                <textarea class="border" name="description" required></textarea>
+                <textarea class="border" id="description" name="description"></textarea>
               </div>
                <div style="visibility:hidden; width:1px;" class="form-block border">
                     <select id="InsuranceID" name="InsuranceID" style="height:1px;" name="ItemID" class="border">
@@ -171,7 +171,7 @@
 
           <div class="form-block">
             <label>Documents Link</label>
-            <input class="border required" type="text" name="DocumentsLink" />
+            <input class="border" type="text" id="DocumentsLink" name="DocumentsLink" />
           </div>
           <br/>
 
@@ -202,7 +202,7 @@
 
           <div class="form-block">
             <label>Claim Value*</label>
-            <input required class="border required" type="number" name="ClaimValue" />
+            <input id="ClaimValue" class="border" type="number" name="ClaimValue" />
           </div>
           <br>
 
@@ -277,6 +277,7 @@
 	<!-- theme custom js  -->
 	<script id="map-script" src="js/default-map.js"></script>
 	<script src="js/custom.js"></script>
+	<script src="cJS/MakeClaim.js?v=1"></script>
 
 
 
