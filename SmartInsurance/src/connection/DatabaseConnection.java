@@ -18,6 +18,7 @@ public class DatabaseConnection {
          cpds.setUser("shady");
          cpds.setPassword("Insurance12");
          cpds.setMaxIdleTime(600);
+         cpds.setMaxPoolSize(40);
          cpds.setUnreturnedConnectionTimeout(60);
          cpds.setAcquireRetryAttempts(1);
          cpds.setPrivilegeSpawnedThreads(true);
