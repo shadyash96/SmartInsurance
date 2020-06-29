@@ -118,9 +118,11 @@ active=" ";%>
 							Portal</a>
 						<ul class="submenu">
 						<% if (login.equals("Client")){%>
-							<li><a style="cursor:pointer;" onclick="redirect('clientProfile','Client')">User Info</a></li>
+							<li><a style="cursor:pointer;" onclick="redirect('clientProfile','Client')">User Profile</a></li>
+							<li><a style="cursor:pointer;" onclick="redirect('insuranceRequests','Client')">Insurance Requests</a></li>
 							<li><a style="cursor:pointer;" onclick="redirect('insuredItems','Client')">Insured Items</a></li>
 							<li><a style="cursor:pointer;" onclick="redirect('Payments','Client')">Payments</a></li>
+							<li><a style="cursor:pointer;" onclick="redirect('ClaimsStatus','Client')">Claims Status</a></li>
 							<li><a style="cursor:pointer;" onclick="redirect('MakeClaim','Client')">Claim Request</a></li>
 							<%}
 						else{%>
