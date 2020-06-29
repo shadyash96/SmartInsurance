@@ -108,8 +108,9 @@
     				if (Requests.get(i)[5].equalsIgnoreCase("Cash"))
     					out.print(Requests.get(i)[11]+" EGP");
     					else{
+    						int PayPerMonth=(Integer.parseInt(Requests.get(i)[11])-Integer.parseInt(Requests.get(i)[7]))/Integer.parseInt(Requests.get(i)[6]);
     						out.print("Downpayment: "+Requests.get(i)[7]+" EGP<br>");
-    						out.print(Requests.get(i)[11]+" EGP for "+Requests.get(i)[6]+" Months");
+    						out.print(String.valueOf(PayPerMonth)+" EGP for "+Requests.get(i)[6]+" Months");
     					}%>
     				</strong></p></td>
     				<td class=""><span class="button small alt" style="<%=(Requests.get(i)[9].equals("Declined")?"background-color: red;":(Requests.get(i)[9].equals("Approved")?"background-color: blue;":""))%>"><%=Requests.get(i)[9] %></span></td>
