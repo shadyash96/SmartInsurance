@@ -78,12 +78,13 @@ public class InsuranceRequest extends HttpServlet {
 			if (PaymentType.equals("installment")) {
 				ps.setInt(9, Integer.parseInt(InstallmentDuration));
 				ps.setInt(10,Integer.parseInt(InstallmentDownpayment));
+				ps.setInt(11, (Integer.parseInt(PremiumValue.split(" ")[0])*Integer.parseInt(InstallmentDuration))+Integer.parseInt(InstallmentDownpayment));
 			}
 			else {
 				ps.setNull(9, java.sql.Types.INTEGER);
 				ps.setNull(10, java.sql.Types.INTEGER);
+				ps.setInt(11, Integer.parseInt(PremiumValue.split(" ")[0]));
 			}
-			ps.setInt(11, Integer.parseInt(PremiumValue.split(" ")[0]));
 			ps.execute();
 			c.close();
 			request.getRequestDispatcher("WEB-INF/Client/insuranceRequests.jsp").forward(request, response);
