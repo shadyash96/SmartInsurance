@@ -447,7 +447,7 @@ if (JSessionID!=null){
 											<input id="PremiumValue" name="PremiumValue" type="text" value="" placeholder="Premium Quotation" readonly>
 										</div>
 										<%if (login.equals("Client")) {%>
-										<button type="submit" class="thm-btn sub">Submit Request</button>
+										<button type="submit" id="SubmitRequestBut" class="thm-btn sub">Submit Request</button>
 										<%}%>
 										
 									</div>

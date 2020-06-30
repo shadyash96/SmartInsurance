@@ -495,8 +495,11 @@ function CalculateInitialPremium(){
 
 function validateForm(){
 	//alert("true");
+	$("#SubmitRequestBut").attr("disabled", true);
+	CalculatePremium();
 	 if (document.getElementById("Categories").selectedIndex==0){
 			alert("Please Select a Category");
+			$("#SubmitRequestBut").attr("disabled", false);
 			return false;
 		}
 	 var SubCount=0;
@@ -504,6 +507,7 @@ function validateForm(){
 		while (SubelementExists!=null){
 			if (SubelementExists.selectedIndex==0){
 				alert("Please Select a "+SubelementExists.getAttribute("name"));
+				$("#SubmitRequestBut").attr("disabled", false);
 				return false;
 			}
 			SubCount++;
@@ -512,15 +516,18 @@ function validateForm(){
 		
 		if (document.getElementById("CoveragePercentage").value<1){
 			alert("Please specify the Coverage Percentage");
+			$("#SubmitRequestBut").attr("disabled", false);
 			return false;
 		}
 		if (document.getElementById("InsuranceDuration").value<1){
 			alert("Please specify the Insurance Duration");
+			$("#SubmitRequestBut").attr("disabled", false);
 			return false;
 		}
 		var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
 		if (PaymentType=="installment" && document.getElementById("InstallmentDuration").value<1){
 			alert("Please specify the Installment Duration");
+			$("#SubmitRequestBut").attr("disabled", false);
 			return false;
 		}
 	
@@ -529,18 +536,22 @@ function validateForm(){
 	if (document.getElementById("PremiumValue").value.length<1){
 		alert("Premium will be calculated, submit again to confirm");
 		CalculatePremium();
+		$("#SubmitRequestBut").attr("disabled", false);
 		return false;
 	}
 	if (document.getElementById("Categories").selectedIndex==0){
 		alert("Please Select a Category");
+		$("#SubmitRequestBut").attr("disabled", false);
 		return false;
 	}
 	var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
 	var InstallmentDownpayment=document.getElementById("InstallmentDownpayment");
 	if (PaymentType=="installment" && InstallmentDownpayment.value<InstallmentDownpayment.min){
 		alert("Downpayment minimum should be "+document.getElementById("InstallmentDownpayment").min);
+		$("#SubmitRequestBut").attr("disabled", false);
 		return false;
 	}
+	$("#SubmitRequestBut").attr("disabled", false);
 	return true;}
 //////////////ON CHANGE ///////////////////////////////////////////
 //document.getElementById("CoveragePercentage").onchange = function(){
