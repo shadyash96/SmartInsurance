@@ -93,7 +93,7 @@ c.close();
 				<div class="row intro-title text-center">
 					<div class="col-sm-12">
 						<div class="section-title">
-							<h1 class="title text-white">CLIENT LOGIN/REGISTER</h1>
+							<h1 class="title text-white">INSURER LOGIN/REGISTER</h1>
 						</div>
 					</div>
 					<div class="col-sm-12">
