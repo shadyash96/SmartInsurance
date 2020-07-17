@@ -176,7 +176,7 @@
 <!-- theme custom js  -->
 <script id="map-script" src="js/default-map.js"></script>
 <script src="js/custom.js"></script>
-<script src="cJS/ClientPayments.js?v=2"></script>
+<script src="cJS/ClientPayments.js?v=3"></script>
 
 
 

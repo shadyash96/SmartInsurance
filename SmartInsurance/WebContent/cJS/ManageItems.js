@@ -20,6 +20,7 @@ window.onload=function(){ // lma el page t5ls load
 }
 function CategoryChange(){// lma el category btt3'yr
 	var count=0;
+	document.getElementById("Price").value="";
 	var UsedFieldDivExists=document.getElementById("DivSub"+(count+1));
 	while (UsedFieldDivExists!=null){
 		// alert("da5l");

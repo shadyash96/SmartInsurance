@@ -356,6 +356,12 @@ function getPrice(){
         		document.getElementById("ProductPrice").readOnly=true;
         		document.getElementById("ProductPrice").setAttribute('value',data);
         		document.getElementById("ProductPrice").value=data;
+        		if (Condition=="used" && document.getElementById("UsedPriceMode").value!="manual" && SelectedCategory=="Cars"){
+        			document.getElementById("ProductPrice").setAttribute('value',(data*35));
+        			document.getElementById("ProductPrice").value=data*35;
+        			//alert(data*30+":"+data);
+        		}
+        		
         		}
         	PriceChange();
         }
@@ -443,7 +449,7 @@ function CalculatePremium(){
         	var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
         	var InstallmentDownpayment=document.getElementById("InstallmentDownpayment").value;
         	var InstallmentDuration=document.getElementById("InstallmentDuration").value;
-        	if (PaymentType=="installment" && (parseInt(InstallmentDownpayment)< parseInt(document.getElementById("InstallmentDownpayment").min) || InstallmentDownpayment<1)){
+        	if (PaymentType=="installment" && (parseInt(InstallmentDownpayment) < parseInt(document.getElementById("InstallmentDownpayment").min) || InstallmentDownpayment<1)){
         		alert("Downpayment minimum should be "+document.getElementById("InstallmentDownpayment").min);
         		return;
         	}
@@ -546,7 +552,7 @@ function validateForm(){
 	}
 	var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
 	var InstallmentDownpayment=document.getElementById("InstallmentDownpayment");
-	if (PaymentType=="installment" && InstallmentDownpayment.value<InstallmentDownpayment.min){
+	if (PaymentType=="installment" && InstallmentDownpayment.value < InstallmentDownpayment.min){
 		alert("Downpayment minimum should be "+document.getElementById("InstallmentDownpayment").min);
 		$("#SubmitRequestBut").attr("disabled", false);
 		return false;

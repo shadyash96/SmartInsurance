@@ -130,7 +130,7 @@
     <script src="insurerCSS/js2/jquery.dataTables.min.js"></script>
     <!-- Custom Js -->
     <script src="insurerCSS/js2/main.js"></script>
-    <script src="cJS/ManageItems.js?v=1"></script>
+    <script src="cJS/ManageItems.js?v=2"></script>
 
 </body>
 

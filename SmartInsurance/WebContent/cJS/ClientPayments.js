@@ -65,9 +65,10 @@ function getClientInfo(){
         	if (ALLInstallments[0].length<1){
         		$("#InstallmentFirst tr").remove();
         		$("#InstallmentFirst h5").remove();
-        		$("#InstallmentFirst").append("<h5>There are no pending installments.</h5>");
+        		$("#InstallmentFirst").append("<h5 id=\"Pending\">There are no pending installments.</h5>");
         		}
         	else{
+        		$("#Pending").remove();
         		$("#InstallmentFirst tr").remove();
         		$("#InstallmentFirst").append("<tr>"+
                                                 "<th>Installment ID </th>"+

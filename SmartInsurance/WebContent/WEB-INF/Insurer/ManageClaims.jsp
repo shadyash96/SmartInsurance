@@ -92,7 +92,7 @@ ArrayList<String[]> Requests=GetInfo.getClaimRequests();
                                       </div>
                                       <div class="col-12-xxxl col-lg-12 col-12 form-group">
                                           <label>Rejection Reason (Required Only If Request is Rejected)</label>
-                                          <input name="RejectionReason" type="text" placeholder="#" class="form-control">
+                                          <input name="RejectionReason" type="text" placeholder="" class="form-control">
                                       </div>
                                       <div class="col-12 form-group mg-t-8">
                                         <button type="submit" name="fetch" value="Approve" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Approve</button>
