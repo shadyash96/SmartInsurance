@@ -552,7 +552,7 @@ function validateForm(){
 	}
 	var PaymentType=document.querySelector('input[name="PaymentType"]:checked').value;
 	var InstallmentDownpayment=document.getElementById("InstallmentDownpayment");
-	if (PaymentType=="installment" && InstallmentDownpayment.value < InstallmentDownpayment.min){
+	if (PaymentType=="installment" && parseInt(InstallmentDownpayment.value) < parseInt(InstallmentDownpayment.min)){
 		alert("Downpayment minimum should be "+document.getElementById("InstallmentDownpayment").min);
 		$("#SubmitRequestBut").attr("disabled", false);
 		return false;

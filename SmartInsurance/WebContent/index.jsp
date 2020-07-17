@@ -37,7 +37,7 @@
 	================================================== -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
-<script src="cJS/index.js?v=7"></script>
+<script src="cJS/index.js?v=8"></script>
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
 <!--[if lt IE 9]>

@@ -60,12 +60,12 @@ public class ManageCategories extends HttpServlet {
 					return;
 				}
 				else {
-					String statement="item_ID int IDENTITY(1, 1) PRIMARY KEY, URL nvarchar(200), Price int";
+					String statement="item_ID int IDENTITY(1, 1) PRIMARY KEY, URL nvarchar (200), Price int";
 					int SubCount=Integer.parseInt(request.getParameter("SubNum"));
 					for (int i=1;i<=SubCount;i++) {
-						statement+=", "+request.getParameter("Sub"+i)+" nvarchar(30)";
+						statement+=", "+request.getParameter("Sub"+i)+" nvarchar (30)";
 					}
-					ps=c.prepareStatement("create table products_"+Category+" ("+statement+")");
+					ps=c.prepareStatement("create table products_"+Category+" ("+statement+");");
 					ps.execute();
 					float Rate=Float.parseFloat(request.getParameter("Rate"));
 					int MinInsurMonths=Integer.parseInt(request.getParameter("MinimumInsurMonths"));
